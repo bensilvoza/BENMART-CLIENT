@@ -1,5 +1,4 @@
 import * as React from "react";
-import { SlideFade } from "@chakra-ui/react";
 
 function FeaturedProducts(props) {
   let [images, setImages] = React.useState([
@@ -22,11 +21,6 @@ function FeaturedProducts(props) {
 
   function handleClickGalleryPointer(url) {
     setCurrentImage(url);
-
-    setIsOpen(false);
-    setTimeout(function () {
-      setIsOpen(true);
-    }, 1000);
   }
 
   function handleShowGalleryPointer() {
@@ -42,18 +36,16 @@ function FeaturedProducts(props) {
       onMouseEnter={handleShowGalleryPointer}
       onMouseLeave={handleShowGalleryPointerOnMouseLeave}
     >
-      <SlideFade in={isOpen}>
-        <img
-          style={{
-            objectFit: "cover",
-            width: "100%",
-            height: "30rem",
-            borderRadius: ".5rem",
-          }}
-          src={currentImage}
-          alt=""
-        />
-      </SlideFade>
+      <img
+        style={{
+          objectFit: "cover",
+          width: "100%",
+          height: "30rem",
+          borderRadius: ".5rem",
+        }}
+        src={currentImage}
+        alt=""
+      />
       <div
         style={{
           display: "flex",
