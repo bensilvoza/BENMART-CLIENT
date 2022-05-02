@@ -8,13 +8,15 @@ function ProductCard(props) {
         padding: "1rem",
         border: "1px solid lightgray",
         borderRadius: ".5rem",
+        cursor: "pointer",
       }}
+      onClick={props.onClickProduct}
     >
       <img src={props.url} alt={props.filename} />
       <div style={{ height: ".5rem" }}></div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>₱{props.price}.00</div>
-        <div style={{ color: "pink" }}>
+        <div style={{ color: "darkred" }}>
           <i className="bi bi-heart"></i>
         </div>
       </div>

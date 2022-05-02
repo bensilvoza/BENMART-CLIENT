@@ -9,7 +9,6 @@ function Footer(props) {
         justifyContent: "space-between",
         fontFamily: "Montserrat",
         fontSize: "1rem",
-        fontWeight: "700",
       }}
     >
       <div style={{ display: "flex" }}>
@@ -21,8 +20,10 @@ function Footer(props) {
       </div>
       <div style={{ display: "flex" }}>
         <div>
-          © BENMART.{" "}
-          <span style={{ fontWeight: "400" }}>All Rights Reserved.</span>
+          <span style={{ fontWeight: "700", marginRight: ".2rem" }}>
+            © BENMART.{" "}
+          </span>
+          All Rights Reserved.
         </div>
       </div>
     </div>

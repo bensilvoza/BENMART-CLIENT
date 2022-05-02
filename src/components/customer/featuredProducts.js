@@ -4,15 +4,15 @@ function FeaturedProducts(props) {
   let [images, setImages] = React.useState([
     {
       ID: 134242322,
-      url: "https://www.solidbackgrounds.com/images/7680x4320/7680x4320-glaucous-solid-color-background.jpg",
+      url: "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1651460974/francesca-tosolini-lLDh9JppH2c-unsplash_qwxtru.jpg",
     },
     {
       ID: 2748338,
-      url: "https://www.solidbackgrounds.com/images/7680x4320/7680x4320-light-salmon-pink-solid-color-background.jpg",
+      url: "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1651460974/nathan-oakley-q2xKzfyg83w-unsplash_kz0csc.jpg",
     },
     {
       ID: 7864673,
-      url: "https://www.solidbackgrounds.com/images/7680x4320/7680x4320-safety-yellow-solid-color-background.jpg",
+      url: "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1651460974/kyoshi-reyes-Ps_ujcY0oT8-unsplash_lto6i1.jpg",
     },
   ]);
   let [currentImage, setCurrentImage] = React.useState(images[0]["url"]);
@@ -56,7 +56,7 @@ function FeaturedProducts(props) {
       >
         {images.map((image) => (
           <div
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", marginRight: ".3rem" }}
             onClick={function () {
               handleClickGalleryPointer(image["url"]);
             }}

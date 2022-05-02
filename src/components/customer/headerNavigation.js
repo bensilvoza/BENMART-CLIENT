@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 // css
 import "./headerNavigation.css";
@@ -14,6 +15,12 @@ import {
 } from "@chakra-ui/react";
 
 function Header(props) {
+  const navigate = useNavigate();
+
+  function handleClickBenmart() {
+    navigate("/");
+  }
+
   function handleClickMenuIcon() {
     let r = document.querySelector(":root");
     r.style.setProperty("--menuIcon", "none");
@@ -37,19 +44,16 @@ function Header(props) {
     });
   });
 
-  // count every render
-  console.log("render: " + Math.random());
-
   return (
     <div>
       <div onClick={handleClickMenuIcon} className="menuIcon">
         <i className="bi bi-menu-button m-0"></i>
       </div>
       <div className="headerContainer">
-        <p className="brandName" onClick={props.handleClickBenmart}>
+        <p className="brandName" onClick={handleClickBenmart}>
           BENMART
         </p>
-        <p className="mainItems" onClick={props.handleClickProducts}>
+        <p className="mainItems" onClick={props.onClickProducts}>
           <span>
             <i className="bi bi-collection m-0"></i>
           </span>{" "}
@@ -67,7 +71,7 @@ function Header(props) {
           </span>{" "}
           Orders
         </p>
-        <p className="mainItems" onClick={props.handleClickAccount}>
+        <p className="mainItems" onClick={props.onClickAccount}>
           <span style={{ color: "gray" }}>
             <i className="bi bi-person-square m-0"></i>
           </span>{" "}
@@ -92,7 +96,7 @@ function Header(props) {
               type="text"
               focusBorderColor="black"
               placeholder="search our store"
-              _placeholder={{ color: "black", paddingLeft: ".2rem" }}
+              _placeholder={{ color: "gray", paddingLeft: ".2rem" }}
             />
           </InputGroup>
         </div>

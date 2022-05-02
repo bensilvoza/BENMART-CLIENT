@@ -6,6 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // Pages
 import Home from "./pages/customer/home";
+import CustomerProducts from "./pages/customer/products/products";
+import CustomerProduct from "./pages/customer/products/product";
+import Login from "./pages/customer/login";
+import Register from "./pages/customer/register";
+
+// admin
 import AdministratorProductsCreate from "./pages/administrator/products/create";
 
 // context
@@ -18,6 +24,11 @@ function App() {
         <CreateProductContextProvider>
           <Routes>
             <Route exact path="/" element={<Home />} />
+            <Route exact path="/products" element={<CustomerProducts />} />
+            <Route exact path="/products/:ID" element={<CustomerProduct />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+
             <Route
               exact
               path="/administrator/products/create"
