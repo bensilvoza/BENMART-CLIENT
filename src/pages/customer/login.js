@@ -3,32 +3,74 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// HTML parser
+import parse from "html-react-parser";
+
+// Base Web
+import { Grid, Cell } from "baseui/layout-grid";
+import { Notification, KIND as NOTIFICATIONKIND } from "baseui/notification";
+
+// context
+import { LoginContext } from "../../contexts/customer/loginContext";
+
 // components
 import HeaderNavigation from "../../components/customer/headerNavigation";
 import LoginForm from "../../components/customer/loginForm";
 import Foooter from "../../components/customer/footer";
 import Space from "../../components/customer/space";
 
-// HTML parser
-import parse from "html-react-parser";
-
-// Base Web
-import { Grid, Cell } from "baseui/layout-grid";
-
 function Login() {
   const navigate = useNavigate();
 
+  // context
+  var { handleCustomerMate, handleAuthenticated } =
+    React.useContext(LoginContext);
+
   var [email, setEmail] = React.useState("");
   var [password, setPassword] = React.useState("");
+
+  var [showLoginMessage, setShowLoginMessage] = React.useState(false);
 
   function handleClickProducts() {
     navigate("/products");
   }
 
-  function handleSubmitForm(e) {
+  async function handleSubmitForm(e) {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
+
+    var customer = {
+      email: email,
+      password: password,
+    };
+
+    // communicate to the backend
+    var send = await axios.post("http://localhost:5000/login", customer);
+
+    if (send["data"]["message"] === "ERROR") {
+      // Incorrect credentials
+      setShowLoginMessage(true);
+      // adding setTimeout
+      // setTimeout is asynchronous
+      setTimeout(function () {
+        return setShowLoginMessage(false);
+      }, 10000);
+    } else {
+      // login
+      var customer = send["data"];
+
+      // context
+      // why save function to variable,
+      // to use the function as a storage,
+      // not to execute call or trigger the function
+      // write customer details to context
+      handleCustomerMate(customer);
+      var handleAuthenticatedMateLocal = handleAuthenticated;
+      // set customer as authenticated or login
+      handleAuthenticatedMateLocal();
+
+      // navigate customer to homepage
+      navigate("/");
+    }
   }
 
   // count every render
@@ -52,7 +94,21 @@ function Login() {
         </Cell>
 
         <Cell span={6}>
-          <Space height="6rem" />
+          <Space height="1rem" />
+          <Notification
+            kind={NOTIFICATIONKIND.negative}
+            overrides={{
+              Body: {
+                style: {
+                  visibility: showLoginMessage === true ? "visible" : "hidden",
+                },
+              },
+            }}
+          >
+            Incorrect credentials
+          </Notification>
+
+          <Space height="1rem" />
           <LoginForm
             onSubmitForm={handleSubmitForm}
             emailValue={email}

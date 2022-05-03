@@ -9,20 +9,47 @@ import parse from "html-react-parser";
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
 
+// context
+import { LoginContext } from "../../../contexts/customer/loginContext";
+
 // components
 import HeaderNavigation from "../../../components/customer/headerNavigation";
 import Foooter from "../../../components/customer/footer";
 import ProductDetailsInfoAndCart from "../../../components/customer/productDetailsInfoAndCart";
+import MainNotification from "../../../components/customer/mainNotification";
 import Space from "../../../components/customer/space";
 
 function Product() {
   const navigate = useNavigate();
   var { ID } = useParams();
 
+  // context
+  var { customer, isAuthenticated } = React.useContext(LoginContext);
+
   var [product, setProduct] = React.useState(undefined);
+  var [showIsAuthenticatedMessage, setShowIsAuthenticatedMessage] =
+    React.useState(false);
 
   function handleClickProducts() {
     navigate("/products");
+  }
+
+  function handleClickAddToCart() {
+    if (isAuthenticated === false) {
+      // customer is not logged in
+      setShowIsAuthenticatedMessage(true);
+
+      // adding setTimeout
+      // setTimeout is asynchronous
+      setTimeout(function () {
+        return setShowIsAuthenticatedMessage(false);
+      }, 10000);
+
+      // terminate
+      return;
+    }
+
+    console.log("I am still working");
   }
 
   // destroy is not a function
@@ -45,10 +72,13 @@ function Product() {
     run();
   }, []);
 
-  console.log(product);
-
   return (
     <>
+      {/* main notification */}
+      {showIsAuthenticatedMessage === true && (
+        <MainNotification backgroundColor="#fcc0b8" message="Login required" />
+      )}
+
       <Grid
         overrides={{
           Grid: {
@@ -86,6 +116,7 @@ function Product() {
               name={product["name"]}
               price={product["price"]}
               description={parse(product["description"])}
+              onClickAddToCart={handleClickAddToCart}
             />
           </Cell>
         )}

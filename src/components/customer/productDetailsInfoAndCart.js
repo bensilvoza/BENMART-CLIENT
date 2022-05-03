@@ -90,6 +90,7 @@ function ProductDetailsInfoAndCart(props) {
 
       <div>
         <Button
+          onClick={props.onClickAddToCart}
           overrides={{
             BaseButton: {
               style: {
