@@ -2,6 +2,7 @@
 import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Fade from "react-reveal/Fade";
 
 // HTML parser
 import parse from "html-react-parser";
@@ -16,7 +17,7 @@ import { LoginContext } from "../../../contexts/customer/loginContext";
 import HeaderNavigation from "../../../components/customer/headerNavigation";
 import Foooter from "../../../components/customer/footer";
 import ProductDetailsInfoAndCart from "../../../components/customer/productDetailsInfoAndCart";
-import MainNotification from "../../../components/customer/mainNotification";
+import Notification from "../../../components/customer/addToCartNotification";
 import Space from "../../../components/customer/space";
 
 function Product() {
@@ -29,6 +30,13 @@ function Product() {
   var [product, setProduct] = React.useState(undefined);
   var [showIsAuthenticatedMessage, setShowIsAuthenticatedMessage] =
     React.useState(false);
+  var [showAddToCartNotification, setShowAddToCartNotification] =
+    React.useState(false);
+  var [notificationMessage, setNotificationMessage] = React.useState("");
+  var [notificationBorderColor, setNotificationBorderColor] =
+    React.useState("");
+  var [notificationMessageColor, setNotificationMessageColor] =
+    React.useState("");
 
   function handleClickProducts() {
     navigate("/products");
@@ -37,12 +45,18 @@ function Product() {
   function handleClickAddToCart() {
     if (isAuthenticated === false) {
       // customer is not logged in
-      setShowIsAuthenticatedMessage(true);
+      setShowAddToCartNotification(true);
+      setNotificationMessage("Login required");
+      setNotificationBorderColor("1px solid darkred");
+      setNotificationMessageColor("darkred");
 
       // adding setTimeout
       // setTimeout is asynchronous
       setTimeout(function () {
-        return setShowIsAuthenticatedMessage(false);
+        setShowAddToCartNotification(false);
+        setNotificationMessage("");
+        setNotificationBorderColor("");
+        setNotificationMessageColor("");
       }, 10000);
 
       // terminate
@@ -76,7 +90,9 @@ function Product() {
     <>
       {/* main notification */}
       {showIsAuthenticatedMessage === true && (
-        <MainNotification backgroundColor="#fcc0b8" message="Login required" />
+        <Fade top>
+          <Notification backgroundColor="#fcc0b8" message="Login required" />
+        </Fade>
       )}
 
       <Grid
@@ -117,6 +133,10 @@ function Product() {
               price={product["price"]}
               description={parse(product["description"])}
               onClickAddToCart={handleClickAddToCart}
+              showAddToCartNotification={showAddToCartNotification}
+              notificationMessage={notificationMessage}
+              notificationBorderColor={notificationBorderColor}
+              notificationMessageColor={notificationMessageColor}
             />
           </Cell>
         )}

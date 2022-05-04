@@ -1,5 +1,6 @@
 import * as React from "react";
 import Space from "./space";
+import AddToCartNotification from "./addToCartNotification";
 
 // base web
 import { Button } from "baseui/button";
@@ -57,36 +58,45 @@ function ProductDetailsInfoAndCart(props) {
       </p>
       <Space height="2rem" />
 
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ display: "flex" }}>
-          <span
-            onClick={handleClickSubtractOrder}
-            style={{
-              color: "gray",
-              fontSize: "2rem",
-              marginRight: ".5rem",
-              cursor: "pointer",
-            }}
-          >
-            <i className="bi bi-dash-circle"></i>
-          </span>
-          <span
-            style={{ fontSize: "2rem", marginRight: ".5rem", color: "gray" }}
-          >
-            {orderQuantity}
-          </span>
-          <span
-            onClick={handleClickAddOrder}
-            style={{ color: "gray", fontSize: "2rem", cursor: "pointer" }}
-          >
-            <i className="bi bi-plus-circle"></i>
-          </span>
-        </div>
+      {props.showAddToCartNotification ? (
+        <AddToCartNotification
+          marginBottom=".3rem"
+          message={props.notificationMessage}
+          border={props.notificationBorderColor}
+          color={props.notificationMessageColor}
+        />
+      ) : (
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex" }}>
+            <span
+              onClick={handleClickSubtractOrder}
+              style={{
+                color: "gray",
+                fontSize: "2rem",
+                marginRight: ".5rem",
+                cursor: "pointer",
+              }}
+            >
+              <i className="bi bi-dash-circle"></i>
+            </span>
+            <span
+              style={{ fontSize: "2rem", marginRight: ".5rem", color: "gray" }}
+            >
+              {orderQuantity}
+            </span>
+            <span
+              onClick={handleClickAddOrder}
+              style={{ color: "gray", fontSize: "2rem", cursor: "pointer" }}
+            >
+              <i className="bi bi-plus-circle"></i>
+            </span>
+          </div>
 
-        <div style={{ fontSize: "2rem" }}>
-          ₱{props.price * orderQuantity}.00
+          <div style={{ fontSize: "2rem" }}>
+            ₱{props.price * orderQuantity}.00
+          </div>
         </div>
-      </div>
+      )}
 
       <div>
         <Button
