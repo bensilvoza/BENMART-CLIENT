@@ -8,21 +8,6 @@ import Product from "../../pages/customer/products/product";
 
 function ProductDetailsInfoAndCart(props) {
   // put the state here
-  var [orderQuantity, setOrderQuantity] = React.useState(1);
-
-  function handleClickSubtractOrder() {
-    if (orderQuantity === 1) return;
-
-    // create a copy of state first
-    var orderQuantityCopy = orderQuantity;
-    setOrderQuantity(orderQuantityCopy - 1);
-  }
-
-  function handleClickAddOrder() {
-    var orderQuantityCopy = orderQuantity;
-    setOrderQuantity(orderQuantityCopy + 1);
-  }
-
   return (
     <div>
       <h1 style={{ fontFamily: "Montserrat", fontSize: "1.5rem" }}>
@@ -69,7 +54,7 @@ function ProductDetailsInfoAndCart(props) {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ display: "flex" }}>
             <span
-              onClick={handleClickSubtractOrder}
+              onClick={props.onClickSubtractOrder}
               style={{
                 color: "gray",
                 fontSize: "2rem",
@@ -82,10 +67,10 @@ function ProductDetailsInfoAndCart(props) {
             <span
               style={{ fontSize: "2rem", marginRight: ".5rem", color: "gray" }}
             >
-              {orderQuantity}
+              {props.orderQuantity}
             </span>
             <span
-              onClick={handleClickAddOrder}
+              onClick={props.onClickAddOrder}
               style={{ color: "gray", fontSize: "2rem", cursor: "pointer" }}
             >
               <i className="bi bi-plus-circle"></i>
@@ -93,7 +78,7 @@ function ProductDetailsInfoAndCart(props) {
           </div>
 
           <div style={{ fontSize: "2rem" }}>
-            ₱{props.price * orderQuantity}.00
+            ₱{props.price * props.orderQuantity}.00
           </div>
         </div>
       )}

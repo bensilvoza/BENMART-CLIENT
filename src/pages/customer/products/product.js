@@ -38,11 +38,26 @@ function Product() {
   var [notificationMessageColor, setNotificationMessageColor] =
     React.useState("");
 
+  var [orderQuantity, setOrderQuantity] = React.useState(1);
+
+  function handleClickSubtractOrder() {
+    if (orderQuantity === 1) return;
+
+    // create a copy of state first
+    var orderQuantityCopy = orderQuantity;
+    setOrderQuantity(orderQuantityCopy - 1);
+  }
+
+  function handleClickAddOrder() {
+    var orderQuantityCopy = orderQuantity;
+    setOrderQuantity(orderQuantityCopy + 1);
+  }
+
   function handleClickProducts() {
     navigate("/products");
   }
 
-  function handleClickAddToCart() {
+  async function handleClickAddToCart() {
     if (isAuthenticated === false) {
       // customer is not logged in
       setShowAddToCartNotification(true);
@@ -63,7 +78,27 @@ function Product() {
       return;
     }
 
-    console.log("I am still working");
+    var productID = ID;
+
+    // communicate to the backend
+    var send = await axios.get("http://localhost:5000/products/" + productID);
+
+    var product = send["data"];
+
+    console.log(product);
+
+    var orders = JSON.parse(localStorage.getItem("orders"));
+
+    if (orders == undefined) {
+      // no orders found on localStorage
+      // after the customer click the
+      // add to cart button, store order to localStorage
+      localStorage.setItem("orders", JSON.stringify([product]));
+    } else {
+      // orders is present at localStorage
+      orders.push(product);
+      localStorage.setItem("orders", JSON.stringify(orders));
+    }
   }
 
   // destroy is not a function
@@ -137,6 +172,9 @@ function Product() {
               notificationMessage={notificationMessage}
               notificationBorderColor={notificationBorderColor}
               notificationMessageColor={notificationMessageColor}
+              orderQuantity={orderQuantity}
+              onClickSubtractOrder={handleClickSubtractOrder}
+              onClickAddOrder={handleClickAddOrder}
             />
           </Cell>
         )}
