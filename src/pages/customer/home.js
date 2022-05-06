@@ -140,6 +140,15 @@ function Home() {
           <FeedbackCard />
           <Space height="6rem" />
         </Cell>
+
+        <Cell span={12}>
+          <div>
+            <img
+              src="https://hasura.io/static/footer-img-79b3cfc0ceb3c7e466198ae09e1d4e6e.png"
+              alt=""
+            />
+          </div>
+        </Cell>
       </Grid>
 
       <div style={{ height: ".1rem", backgroundColor: "lightgray" }}></div>

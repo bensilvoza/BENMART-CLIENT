@@ -10,6 +10,7 @@ import CustomerProducts from "./pages/customer/products/products";
 import CustomerProduct from "./pages/customer/products/product";
 import Login from "./pages/customer/login";
 import Register from "./pages/customer/register";
+import Cart from "./pages/customer/checkout/cart";
 
 // admin
 import AdministratorProductsCreate from "./pages/administrator/products/create";
@@ -31,6 +32,7 @@ function App() {
               <Route exact path="/products/:ID" element={<CustomerProduct />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<Register />} />
+              <Route exact path="/cart" element={<Cart />} />
 
               <Route
                 exact

@@ -58,26 +58,6 @@ function Product() {
   }
 
   async function handleClickAddToCart() {
-    if (isAuthenticated === false) {
-      // customer is not logged in
-      setShowAddToCartNotification(true);
-      setNotificationMessage("Login required");
-      setNotificationBorderColor("1px solid darkred");
-      setNotificationMessageColor("darkred");
-
-      // adding setTimeout
-      // setTimeout is asynchronous
-      setTimeout(function () {
-        setShowAddToCartNotification(false);
-        setNotificationMessage("");
-        setNotificationBorderColor("");
-        setNotificationMessageColor("");
-      }, 10000);
-
-      // terminate
-      return;
-    }
-
     var productID = ID;
 
     // communicate to the backend
@@ -85,7 +65,14 @@ function Product() {
 
     var product = send["data"];
 
-    console.log(product);
+    var order = {
+      ID: Math.floor(Math.random() * 1000000000),
+      image: product["images"][0],
+      productName: product["name"],
+      price: product["price"],
+      quantity: orderQuantity,
+      total: product["price"] * orderQuantity,
+    };
 
     var orders = JSON.parse(localStorage.getItem("orders"));
 
@@ -93,12 +80,27 @@ function Product() {
       // no orders found on localStorage
       // after the customer click the
       // add to cart button, store order to localStorage
-      localStorage.setItem("orders", JSON.stringify([product]));
+      localStorage.setItem("orders", JSON.stringify([order]));
     } else {
       // orders is present at localStorage
-      orders.push(product);
+      orders.push(order);
       localStorage.setItem("orders", JSON.stringify(orders));
     }
+
+    // send a notification
+    setShowAddToCartNotification(true);
+    setNotificationMessage("Order added to cart!");
+    setNotificationBorderColor("1px solid darkgreen");
+    setNotificationMessageColor("darkgreen");
+
+    // adding setTimeout
+    // setTimeout is asynchronous
+    setTimeout(function () {
+      setShowAddToCartNotification(false);
+      setNotificationMessage("");
+      setNotificationBorderColor("");
+      setNotificationMessageColor("");
+    }, 10000);
   }
 
   // destroy is not a function
