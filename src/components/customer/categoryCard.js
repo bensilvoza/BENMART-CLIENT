@@ -8,13 +8,11 @@ function CategoryCard(props) {
         justifyContent: "center",
         alignItems: "center",
         border: "1px dashed black",
-        borderRadius: "50%",
-        width: "15rem",
+        borderRadius: "2%",
+        width: "17rem",
         height: "15rem",
         fontFamily: "Pacifico",
         fontSize: "2rem",
-        marginLeft: "auto",
-        marginRight: "auto",
       }}
     >
       <div style={{ color: "gray" }}>{props.name}</div>

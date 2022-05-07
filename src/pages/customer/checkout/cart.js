@@ -1,15 +1,18 @@
 // libraries
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
 import { Button } from "baseui/button";
-import { Notification, KIND as NOTIFICATIONKIND } from "baseui/notification";
+
+// context
+import { LoginContext } from "../../../contexts/customer/loginContext";
 
 // components
 import HeaderNavigation from "../../../components/customer/headerNavigation";
+import CartItems from "../../../components/customer/cartItems";
+import Notification from "../../../components/customer/notification";
 import Space from "../../../components/customer/space";
 
 // utils
@@ -18,8 +21,56 @@ import thousandSeparator from "../../../utils/customer/thousandSeparator";
 function Cart() {
   const navigate = useNavigate();
 
+  // context
+  var { customer, isAuthenticated } = React.useContext(LoginContext);
+
   var [orders, setOrders] = React.useState([]);
   var [orderTotal, setOrderTotal] = React.useState(0);
+
+  var [showNotif, setShowNotif] = React.useState(false);
+  var [notifBorder, setNotifBorder] = React.useState("");
+  var [notifColor, setNotifColor] = React.useState("");
+  var [notifMessage, setNotifMessage] = React.useState("");
+
+  function handleClickDeleteItem(ID) {
+    // do not directly modify state
+    // copy it first using standard
+    // immutability concern
+    var ordersCopy = [...orders].filter(function (order) {
+      return order["ID"] !== ID;
+    });
+
+    var orderTotalCopy = 0;
+    for (var order of ordersCopy) {
+      orderTotalCopy = orderTotalCopy + order["total"];
+    }
+
+    // update orders in localStorage
+    localStorage.setItem("orders", JSON.stringify(ordersCopy));
+
+    setOrderTotal(orderTotalCopy);
+    setOrders(ordersCopy);
+  }
+
+  function handleClickCheckout() {
+    if (isAuthenticated == true) {
+      navigate("/shipping");
+    } else {
+      setShowNotif(true);
+      setNotifBorder("1px solid darkred");
+      setNotifColor("darkred");
+      setNotifMessage("Login required");
+
+      // adding setTimeout
+      // setTimeout is asynchronous
+      setTimeout(function () {
+        setShowNotif(false);
+        setNotifBorder("");
+        setNotifColor("");
+        setNotifMessage("");
+      }, 10000);
+    }
+  }
 
   // destroy is not a function
   // error occured when you put
@@ -44,6 +95,14 @@ function Cart() {
   console.log(orders);
   return (
     <>
+      {showNotif && (
+        <Notification
+          border={notifBorder}
+          color={notifColor}
+          message={notifMessage}
+        />
+      )}
+
       <Grid
         overrides={{
           Grid: {
@@ -56,7 +115,9 @@ function Cart() {
       >
         <Cell span={12}>
           <Space height="2rem" />
-          <HeaderNavigation />
+          <div style={{ visibility: showNotif ? "hidden" : "visible" }}>
+            <HeaderNavigation />
+          </div>
           <Space height="1rem" />
         </Cell>
 
@@ -70,82 +131,69 @@ function Cart() {
 
         <Cell span={12}></Cell>
 
-        <Cell span={12}></Cell>
-
         {orders.map((order) => (
-          <>
-            <Cell span={2}>
-              <img src={order["image"]["url"]} />
-            </Cell>
-            <Cell span={2}>
-              <p style={{ fontFamily: "Montserrat", fontSize: "1.1rem" }}>
-                {order["productName"]}
-              </p>
-            </Cell>
-            <Cell span={1}>
-              <p style={{ fontFamily: "Montserrat", fontSize: "1.1rem" }}>
-                {order["quantity"]}
-              </p>
-            </Cell>
-            <Cell span={3}>
-              <p style={{ fontFamily: "Montserrat", fontSize: "1.1rem" }}>
-                ₱{thousandSeparator(order["total"])}.00
-              </p>
-            </Cell>
-            <Cell span={1}>
-              <div style={{ fontSize: "1.3rem", color: "gray" }}>
-                <i className="bi bi-trash"></i>
-              </div>
-            </Cell>
-
-            <Cell span={9}>
-              <div
-                style={{
-                  height: "1px",
-                  backgroundColor: "lightgray",
-                }}
-              ></div>
-            </Cell>
-
-            <Cell span={12}>
-              <Space height="1rem" />
-            </Cell>
-          </>
+          <CartItems
+            image={order["image"]["url"]}
+            productName={order["productName"]}
+            orderQuantity={order["quantity"]}
+            total={thousandSeparator(order["total"])}
+            onClickDeleteItem={function () {
+              handleClickDeleteItem(order["ID"]);
+            }}
+          />
         ))}
 
         <Cell span={9}>
           <Space height="2rem" />
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          {orderTotal == 0 && (
             <p
               style={{
                 fontFamily: "Montserrat",
-                fontSize: "1.5rem",
-                fontWeight: "900",
+                fontSize: "1.4rem",
+                textAlign: "center",
+                fontStyle: "italic",
                 color: "gray",
               }}
             >
-              TOTAL
+              Cart is empty
             </p>
-            <p
-              style={{
-                fontFamily: "Montserrat",
-                fontSize: "1.5rem",
-                fontWeight: "900",
-                color: "gray",
-              }}
-            >
-              ₱{thousandSeparator(orderTotal)}.00
-            </p>
-          </div>
-          <div
-            style={{
-              height: "10px",
-              backgroundColor: "lightgray",
-              marginBottom: "1rem",
-            }}
-          ></div>
-          <Button onClick={() => alert("click")}>PROCEED TO CHECKOUT</Button>
-          <Space height="6rem" />
+          )}
+
+          {orderTotal > 0 && (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <p
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: "1.5rem",
+                    fontWeight: "900",
+                    color: "gray",
+                  }}
+                >
+                  TOTAL
+                </p>
+                <p
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontSize: "1.5rem",
+                    fontWeight: "900",
+                    color: "gray",
+                  }}
+                >
+                  ₱{thousandSeparator(orderTotal)}.00
+                </p>
+              </div>
+              <div
+                style={{
+                  height: "10px",
+                  backgroundColor: "lightgray",
+                  marginBottom: "1rem",
+                }}
+              ></div>
+              <Button onClick={handleClickCheckout}>PROCEED TO CHECKOUT</Button>
+            </>
+          )}
+          <Space height="8rem" />
         </Cell>
       </Grid>
     </>

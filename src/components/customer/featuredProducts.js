@@ -4,7 +4,7 @@ function FeaturedProducts(props) {
   let [images, setImages] = React.useState([
     {
       ID: 134242322,
-      url: "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1651460974/francesca-tosolini-lLDh9JppH2c-unsplash_qwxtru.jpg",
+      url: "https://d1rlzxa98cyc61.cloudfront.net/kemana/banner/contents/lg-brand-week-main-kv-1200x564_3.jpg",
     },
     {
       ID: 2748338,

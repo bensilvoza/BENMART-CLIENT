@@ -17,6 +17,7 @@ import parse from "html-react-parser";
 
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
+import HomepageBanner from "../../components/customer/homepageBanner";
 
 function Home() {
   const navigate = useNavigate();
@@ -83,14 +84,10 @@ function Home() {
             onClickAccount={handleClickAccount}
           />
 
-          {/* featured products */}
-          <Space height="2.5rem" />
-          <p style={{ fontFamily: "Montserrat", fontSize: "1.5rem" }}>
-            Featured Products
-          </p>
-          <FeaturedProducts />
           <Space height="3rem" />
         </Cell>
+
+        <HomepageBanner />
 
         {/* categories */}
         <Cell span={12}>
@@ -141,6 +138,8 @@ function Home() {
           <Space height="6rem" />
         </Cell>
 
+        {/*
+        homepage footer image temporarily hidden
         <Cell span={12}>
           <div>
             <img
@@ -149,6 +148,7 @@ function Home() {
             />
           </div>
         </Cell>
+        */}
       </Grid>
 
       <div style={{ height: ".1rem", backgroundColor: "lightgray" }}></div>
