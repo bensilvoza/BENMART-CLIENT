@@ -15,6 +15,10 @@ import parse from "html-react-parser";
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
 
+// note
+// add sidebar to products page
+// inspired from bench online store
+
 function Products() {
   const navigate = useNavigate();
 
@@ -47,6 +51,9 @@ function Products() {
 
   return (
     <>
+      <h1>
+        note: add sidebar to products page inspired from bench online store
+      </h1>
       <Grid
         overrides={{
           Grid: {

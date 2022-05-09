@@ -9,11 +9,6 @@ import { Input } from "baseui/input";
 function AddressForm(props) {
   const navigate = useNavigate();
 
-  var [street, setStreet] = React.useState("");
-  var [city, setCity] = React.useState("");
-  var [region, setRegion] = React.useState("");
-  var [country, setCountry] = React.useState("");
-
   function handleClickCreateAccount() {
     navigate("/register");
   }

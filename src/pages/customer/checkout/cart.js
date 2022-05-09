@@ -68,7 +68,7 @@ function Cart() {
         setNotifBorder("");
         setNotifColor("");
         setNotifMessage("");
-      }, 10000);
+      }, 5000);
     }
   }
 
@@ -121,7 +121,7 @@ function Cart() {
           <Space height="1rem" />
         </Cell>
 
-        <Cell span={10}>
+        <Cell span={8}>
           <Space height="2rem" />
           <h1 style={{ fontFamily: "Montserrat", fontSize: "2rem" }}>
             Shopping Cart
@@ -143,7 +143,7 @@ function Cart() {
           />
         ))}
 
-        <Cell span={9}>
+        <Cell span={8}>
           <Space height="2rem" />
           {orderTotal == 0 && (
             <p

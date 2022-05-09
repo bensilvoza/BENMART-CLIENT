@@ -59,7 +59,7 @@ function Header(props) {
           </span>{" "}
           Products
         </p>
-        <p className="mainItems" onClick={props.handleClickCart}>
+        <p className="mainItems" onClick={props.onClickCart}>
           <span>
             <i className="bi bi-cart m-0"></i>
           </span>{" "}

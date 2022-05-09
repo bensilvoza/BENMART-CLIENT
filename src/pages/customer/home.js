@@ -38,6 +38,10 @@ function Home() {
     navigate("/products");
   }
 
+  function handleClickCart() {
+    navigate("/cart");
+  }
+
   function handleClickAccount() {
     navigate("/login");
   }
@@ -81,6 +85,7 @@ function Home() {
           <Space height="2rem" />
           <HeaderNavigation
             onClickProducts={handleClickProducts}
+            onClickCart={handleClickCart}
             onClickAccount={handleClickAccount}
           />
 

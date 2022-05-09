@@ -12,6 +12,8 @@ import Login from "./pages/customer/login";
 import Register from "./pages/customer/register";
 import Cart from "./pages/customer/checkout/cart";
 import Shipping from "./pages/customer/checkout/shipping";
+import Summary from "./pages/customer/checkout/summary";
+import Payment from "./pages/customer/checkout/payment";
 
 // admin
 import AdministratorProductsCreate from "./pages/administrator/products/create";
@@ -35,6 +37,8 @@ function App() {
               <Route exact path="/register" element={<Register />} />
               <Route exact path="/cart" element={<Cart />} />
               <Route exact path="/shipping" element={<Shipping />} />
+              <Route exact path="/summary" element={<Summary />} />
+              <Route exact path="/payment" element={<Payment />} />
 
               <Route
                 exact

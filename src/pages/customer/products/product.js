@@ -4,14 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Fade from "react-reveal/Fade";
 
+// context
+import { LoginContext } from "../../../contexts/customer/loginContext";
+
 // HTML parser
 import parse from "html-react-parser";
 
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
-
-// context
-import { LoginContext } from "../../../contexts/customer/loginContext";
 
 // components
 import HeaderNavigation from "../../../components/customer/headerNavigation";

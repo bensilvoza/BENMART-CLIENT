@@ -5,7 +5,7 @@ import Space from "./space";
 function CartItems(props) {
   return (
     <>
-      <Cell span={2}>
+      <Cell span={1}>
         <img src={props.image} />
       </Cell>
       <Cell span={2}>
@@ -32,7 +32,7 @@ function CartItems(props) {
         </div>
       </Cell>
 
-      <Cell span={9}>
+      <Cell span={8}>
         <div
           style={{
             height: "1px",
