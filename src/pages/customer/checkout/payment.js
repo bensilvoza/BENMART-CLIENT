@@ -25,7 +25,7 @@ function Payment() {
   var [orders, setOrders] = React.useState([]);
   var [orderTotal, setOrderTotal] = React.useState(0);
 
-  function handleCompleteOrder() {
+  async function handleCompleteOrder() {
     var orderInformation = {
       ID: Math.floor(Math.random() * 1000000000),
       customerID: customer["ID"],
@@ -35,8 +35,16 @@ function Payment() {
       paid: false,
     };
 
-    // communicate to backend
-    // ...
+    // communicate to the backend
+    var send = await axios.post(
+      "http://localhost:5000/orders",
+      orderInformation
+    );
+
+    if (send["data"]["message"] == "OK") {
+      // orders successfully saved to db
+      navigate("/account");
+    }
   }
 
   // destroy is not a function

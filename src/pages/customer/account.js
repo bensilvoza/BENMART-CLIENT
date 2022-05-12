@@ -3,12 +3,6 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// components
-import HeaderNavigation from "../../components/customer/headerNavigation";
-import PersonalInformation from "../../components/customer/personalInformation";
-import Foooter from "../../components/customer/footer";
-import Space from "../../components/customer/space";
-
 // HTML parser
 import parse from "html-react-parser";
 
@@ -16,10 +10,23 @@ import parse from "html-react-parser";
 import { Grid, Cell } from "baseui/layout-grid";
 import HomepageBanner from "../../components/customer/homepageBanner";
 
+// context
+import { LoginContext } from "../../contexts/customer/loginContext";
+
+// components
+import HeaderNavigation from "../../components/customer/headerNavigation";
+import PersonalInformation from "../../components/customer/personalInformation";
+import Orders from "../../components/customer/orders";
+import Foooter from "../../components/customer/footer";
+import Space from "../../components/customer/space";
+
 function Account() {
   const navigate = useNavigate();
 
-  var [products, setProducts] = React.useState([]);
+  // context
+  var { customer } = React.useContext(LoginContext);
+
+  var [ordersInformation, setOrdersInformation] = React.useState([]);
 
   function handleClickProducts() {
     navigate("/products");
@@ -39,16 +46,17 @@ function Account() {
   // parent loop
   React.useEffect(function () {
     async function run() {
-      async function getProducts() {
-        var products = await axios.get("http://localhost:5000/");
-        return products["data"];
+      async function getOrders() {
+        var response = await axios.get("http://localhost:5000/orders");
+        return response["data"];
       }
-      var products = await getProducts();
-      var productsCopy = [];
-      for (var i = 0; i <= 11; i++) {
-        productsCopy.push(products[i]);
-      }
-      setProducts(productsCopy);
+
+      var ordersCopy = await getOrders();
+
+      ordersCopy = ordersCopy.filter(function (order) {
+        return order["customerID"] == customer["ID"];
+      });
+      setOrdersInformation(ordersCopy);
     }
     run();
   }, []);
@@ -80,6 +88,31 @@ function Account() {
         </Cell>
 
         <PersonalInformation />
+
+        <Cell span={12}>
+          <Space height="2rem" />
+        </Cell>
+
+        <Cell span={9}>
+          <h1
+            style={{
+              fontFamily: "Montserrat",
+              fontSize: "1.5rem",
+              fontWeight: "700",
+            }}
+          >
+            My Orders
+          </h1>
+          <Space height="2rem" />
+        </Cell>
+
+        {ordersInformation.map((orderInformation) => (
+          <Orders
+            orderID={orderInformation["ID"]}
+            orders={orderInformation["orders"]}
+            total={orderInformation["orderTotal"]}
+          />
+        ))}
       </Grid>
 
       <div style={{ height: ".1rem", backgroundColor: "lightgray" }}></div>

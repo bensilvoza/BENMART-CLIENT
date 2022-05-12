@@ -61,7 +61,7 @@ function Header(props) {
         </p>
         <p className="mainItems" onClick={props.onClickCart}>
           <span>
-            <i className="bi bi-cart m-0"></i>
+            <i className="bi bi-bag m-0"></i>
           </span>{" "}
           Cart
         </p>
@@ -73,7 +73,7 @@ function Header(props) {
         </p>
         <p className="mainItems" onClick={props.onClickAccount}>
           <span style={{ color: "gray" }}>
-            <i className="bi bi-person-square m-0"></i>
+            <i className="bi bi-person-circle m-0"></i>
           </span>{" "}
           Account
         </p>
