@@ -62,34 +62,18 @@ function Shipping() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    // do not directly copy the state
-    // use spread operator and other standard
-    // method of copying, this is for the sake of immutability
-    var updatedCustomer = { ...customer };
-
     var address = {
-      ID: Math.floor(Math.random() * 1000000000),
       street: street,
       city: city,
       region: region,
       country: country,
     };
-    // update customer details
-    updatedCustomer["address"] = address;
 
-    if (hasAddress === true) {
-      // customer updated
-      // his/her old address
-      if (compareAddress(customer["address"], address) == true) {
-        navigate("/summary");
-        return;
-      }
-    }
+    var orderSummary = JSON.parse(localStorage.getItem("orderSummary"));
 
-    var send = axios.post(
-      "http://localhost:5000/register/edit",
-      updatedCustomer
-    );
+    orderSummary["address"] = address;
+
+    localStorage.setItem("orderSummary", JSON.stringify(orderSummary));
 
     navigate("/summary");
   }

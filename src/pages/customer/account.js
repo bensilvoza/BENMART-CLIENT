@@ -27,6 +27,7 @@ function Account() {
   var { customer } = React.useContext(LoginContext);
 
   var [ordersInformation, setOrdersInformation] = React.useState([]);
+  var [address, setAddress] = React.useState("");
 
   function handleClickProducts() {
     navigate("/products");
@@ -57,9 +58,22 @@ function Account() {
         return order["customerID"] == customer["ID"];
       });
       setOrdersInformation(ordersCopy);
+
+      function getAddress() {
+        var addressCopy = "";
+        addressCopy = addressCopy + customer["address"]["street"];
+        addressCopy = addressCopy + " " + customer["address"]["city"];
+        addressCopy = addressCopy + " " + customer["address"]["region"];
+        addressCopy = addressCopy + " " + customer["address"]["country"];
+        return setAddress(addressCopy);
+      }
+      getAddress();
     }
     run();
   }, []);
+
+  console.log(customer);
+  console.log(ordersInformation);
 
   // count every render
   // console.log("render: " + Math.random());
@@ -90,14 +104,14 @@ function Account() {
         <PersonalInformation />
 
         <Cell span={12}>
-          <Space height="2rem" />
+          <Space height="4rem" />
         </Cell>
 
-        <Cell span={9}>
+        <Cell span={8}>
           <h1
             style={{
               fontFamily: "Montserrat",
-              fontSize: "1.5rem",
+              fontSize: "2rem",
               fontWeight: "700",
             }}
           >
@@ -107,15 +121,32 @@ function Account() {
         </Cell>
 
         {ordersInformation.map((orderInformation) => (
-          <Orders
-            orderID={orderInformation["ID"]}
-            orders={orderInformation["orders"]}
-            total={orderInformation["orderTotal"]}
-          />
+          <>
+            <Orders
+              orderID={orderInformation["ID"]}
+              address={address}
+              orders={orderInformation["orders"]}
+              total={orderInformation["total"]}
+              paymentMethod={orderInformation["paymentMethod"].toUpperCase()}
+            />
+            <Cell span={12}>
+              <Space height="2rem" />
+              <div style={{ textAlign: "center", fontSize: "2rem" }}>
+                <i className="bi bi-three-dots m-0"></i>
+              </div>
+              <Space height="2rem" />
+            </Cell>
+          </>
         ))}
       </Grid>
 
-      <div style={{ height: ".1rem", backgroundColor: "lightgray" }}></div>
+      <div
+        style={{
+          height: ".1rem",
+          backgroundColor: "lightgray",
+          marginTop: "4rem",
+        }}
+      ></div>
 
       <Grid>
         <Cell span={12}>

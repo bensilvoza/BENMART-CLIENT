@@ -54,6 +54,18 @@ function Cart() {
 
   function handleClickCheckout() {
     if (isAuthenticated == true) {
+      var orderSummary = {
+        ID: Math.floor(Math.random() * 1000000000),
+        customerID: customer["ID"],
+        orders: orders,
+        address: "",
+        total: orderTotal,
+        paymentMethod: "COD",
+        paid: false,
+      };
+
+      localStorage.setItem("orderSummary", JSON.stringify(orderSummary));
+
       navigate("/shipping");
     } else {
       setShowNotif(true);

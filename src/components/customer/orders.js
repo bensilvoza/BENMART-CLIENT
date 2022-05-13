@@ -22,6 +22,7 @@ function Orders(props) {
             fontFamily: "Montserrat",
             fontSize: "1.5rem",
             fontWeight: "700",
+            color: "#36454F",
           }}
         >
           ORDER ID
@@ -35,6 +36,7 @@ function Orders(props) {
             fontFamily: "Montserrat",
             fontSize: "1.5rem",
             fontWeight: "700",
+            color: "#36454F",
           }}
         >
           SHIPPING
@@ -48,11 +50,12 @@ function Orders(props) {
             fontFamily: "Montserrat",
             fontSize: "1.5rem",
             fontWeight: "700",
+            color: "#36454F",
           }}
         >
           PAYMENT METHOD
         </h1>
-        <h1>--</h1>
+        <h1>{props.paymentMethod}</h1>
         <hr />
 
         <Space height="1rem" />
@@ -61,6 +64,7 @@ function Orders(props) {
             fontFamily: "Montserrat",
             fontSize: "1.5rem",
             fontWeight: "700",
+            color: "#36454F",
           }}
         >
           ORDER ITEMS
@@ -73,7 +77,7 @@ function Orders(props) {
         ))}
       </Cell>
 
-      <Cell span={4}>
+      <Cell span={3}>
         <div>
           <ul className="list-group">
             <li
@@ -83,6 +87,7 @@ function Orders(props) {
                 fontSize: "1.5rem",
                 fontWeight: "700",
                 padding: "1.5rem",
+                color: "#36454F",
               }}
             >
               ORDER SUMMARY
@@ -102,24 +107,20 @@ function Orders(props) {
             <li className="list-group-item">
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p>Tax</p>
-                <p>₱{Math.round(props.total * 0.05)}.00</p>
+                <p>₱0.00</p>
               </div>
             </li>
             <li className="list-group-item">
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p>Total</p>
                 <p>
-                  ₱
-                  {thousandSeparator(
-                    Math.round(props.total + props.total * 0.05)
-                  )}
+                  ₱{thousandSeparator(Math.round(props.total))}
                   .00
                 </p>
               </div>
             </li>
           </ul>
         </div>
-        <Space height="2rem" />
       </Cell>
     </>
   );

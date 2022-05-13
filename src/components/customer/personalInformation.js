@@ -29,7 +29,9 @@ function PersonalInformation(props) {
   return (
     <Cell span={8}>
       <Accordion allowToggle>
-        <AccordionItem style={{ border: "1px solid black" }}>
+        <AccordionItem
+          style={{ borderBottom: "1px solid black", borderTop: "white" }}
+        >
           <h2>
             <AccordionButton>
               <Box style={{ padding: "1rem" }} flex="1" textAlign="left">
