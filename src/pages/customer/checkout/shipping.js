@@ -33,8 +33,6 @@ function Shipping() {
   var [region, setRegion] = React.useState("");
   var [country, setCountry] = React.useState("");
 
-  var [hasAddress, setHasAddress] = React.useState(false);
-
   function handleClickDeleteItem(ID) {
     // do not directly modify state
     // copy it first using standard
@@ -69,11 +67,16 @@ function Shipping() {
       country: country,
     };
 
-    var orderSummary = JSON.parse(localStorage.getItem("orderSummary"));
+    var orderSummaryLocalStorage = JSON.parse(
+      localStorage.getItem("orderSummary")
+    );
 
-    orderSummary["address"] = address;
+    orderSummaryLocalStorage["address"] = address;
 
-    localStorage.setItem("orderSummary", JSON.stringify(orderSummary));
+    localStorage.setItem(
+      "orderSummary",
+      JSON.stringify(orderSummaryLocalStorage)
+    );
 
     navigate("/summary");
   }
@@ -99,14 +102,17 @@ function Shipping() {
       getOrders();
 
       function checkCustomerAddress() {
-        if (customer["address"] !== null) {
-          // customer has an address
-          setStreet(customer["address"]["street"]);
-          setCity(customer["address"]["city"]);
-          setRegion(customer["address"]["region"]);
-          setCountry(customer["address"]["country"]);
-
-          hasAddress(true);
+        var orderSummaryLocalStorage = JSON.parse(
+          localStorage.getItem("orderSummary")
+        );
+        console.log(orderSummaryLocalStorage);
+        console.log("TEST");
+        console.log(orderSummaryLocalStorage["address"]["street"]);
+        if (orderSummaryLocalStorage["address"]["street"] !== undefined) {
+          setStreet(orderSummaryLocalStorage["address"]["street"]);
+          setCity(orderSummaryLocalStorage["address"]["city"]);
+          setRegion(orderSummaryLocalStorage["address"]["region"]);
+          setCountry(orderSummaryLocalStorage["address"]["country"]);
         }
       }
 

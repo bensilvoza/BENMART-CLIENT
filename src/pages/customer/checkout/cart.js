@@ -54,17 +54,33 @@ function Cart() {
 
   function handleClickCheckout() {
     if (isAuthenticated == true) {
-      var orderSummary = {
-        ID: Math.floor(Math.random() * 1000000000),
-        customerID: customer["ID"],
-        orders: orders,
-        address: "",
-        total: orderTotal,
-        paymentMethod: "COD",
-        paid: false,
-      };
+      // check if orderSummary is present
+      // in localStorage
+      var orderSummaryLocalStorage = JSON.parse(
+        localStorage.getItem("orderSummary")
+      );
 
-      localStorage.setItem("orderSummary", JSON.stringify(orderSummary));
+      if (orderSummaryLocalStorage == undefined) {
+        // create order summary
+        var orderSummary = {
+          ID: Math.floor(Math.random() * 1000000000),
+          customerID: customer["ID"],
+          orders: orders,
+          address: "",
+          total: orderTotal,
+          paymentMethod: "COD",
+          paid: false,
+        };
+
+        localStorage.setItem("orderSummary", JSON.stringify(orderSummary));
+      } else {
+        // update order summary
+        orderSummaryLocalStorage["orders"] = orders;
+        localStorage.setItem(
+          "orderSummary",
+          JSON.stringify(orderSummaryLocalStorage)
+        );
+      }
 
       navigate("/shipping");
     } else {

@@ -56,7 +56,10 @@ function Login() {
       }, 10000);
     } else {
       // login
-      var customer = send["data"];
+      var customer = send["data"]["customer"];
+
+      // save JWT to localStorage
+      localStorage.setItem("jwt", `Bearer ${send["data"]["token"]}`);
 
       // context
       // why save function to variable,

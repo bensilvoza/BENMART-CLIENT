@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // components
+import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
 import HeaderNavigation from "../../components/customer/headerNavigation";
-import FeaturedProducts from "../../components/customer/featuredProducts";
 import CategoryCard from "../../components/customer/categoryCard";
 import ProductCard from "../../components/customer/productCard";
 import FeedbackCard from "../../components/customer/feedbackCard";
@@ -83,7 +83,7 @@ function Home() {
       >
         <Cell span={12}>
           <Space height="2rem" />
-          <HeaderNavigation
+          <HeaderNavigationCompact
             onClickProducts={handleClickProducts}
             onClickCart={handleClickCart}
             onClickAccount={handleClickAccount}

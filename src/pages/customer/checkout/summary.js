@@ -25,7 +25,7 @@ function Summary() {
   // context
   var { customer, isAuthenticated } = React.useContext(LoginContext);
 
-  var [orders, setOrders] = React.useState([]);
+  var [orderSummary, setOrderSummary] = React.useState({});
   var [orderTotal, setOrderTotal] = React.useState(0);
   var [address, setAddress] = React.useState("");
 
@@ -34,26 +34,32 @@ function Summary() {
   // async function in useEffect
   // parent loop
   React.useEffect(function () {
+    // order summary can be found on local storage
+    var orderSummaryLocalStorage = JSON.parse(
+      localStorage.getItem("orderSummary")
+    );
     async function run() {
-      function getOrders() {
-        // orders location is from localStorage
-        var orders = JSON.parse(localStorage.getItem("orders"));
-        setOrders(orders);
+      function getOrderSummary() {
+        setOrderSummary(orderSummaryLocalStorage);
 
         var orderTotalCopy = 0;
-        for (var order of orders) {
+        for (var order of orderSummaryLocalStorage["orders"]) {
           orderTotalCopy = orderTotalCopy + order["total"];
         }
         setOrderTotal(orderTotalCopy);
       }
-      getOrders();
+      getOrderSummary();
 
       function getAddress() {
         var addressCopy = "";
-        addressCopy = addressCopy + customer["address"]["street"];
-        addressCopy = addressCopy + " " + customer["address"]["city"];
-        addressCopy = addressCopy + " " + customer["address"]["region"];
-        addressCopy = addressCopy + " " + customer["address"]["country"];
+        addressCopy =
+          addressCopy + orderSummaryLocalStorage["address"]["street"];
+        addressCopy =
+          addressCopy + " " + orderSummaryLocalStorage["address"]["city"];
+        addressCopy =
+          addressCopy + " " + orderSummaryLocalStorage["address"]["region"];
+        addressCopy =
+          addressCopy + " " + orderSummaryLocalStorage["address"]["country"];
         return setAddress(addressCopy);
       }
       getAddress();
@@ -61,6 +67,7 @@ function Summary() {
     run();
   }, []);
 
+  console.log(address);
   // count every render
   // console.log("render: " + Math.random());
 
@@ -89,7 +96,13 @@ function Summary() {
         </Cell>
 
         <Cell span={12}></Cell>
-        <OrderSummary address={address} orders={orders} total={orderTotal} />
+        <OrderSummary
+          address={address}
+          orders={
+            orderSummary["orders"] == undefined ? [] : orderSummary["orders"]
+          }
+          total={orderTotal}
+        />
       </Grid>
     </>
   );

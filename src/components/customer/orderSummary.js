@@ -97,7 +97,7 @@ function OrderSummary(props) {
             <li className="list-group-item">
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p>Tax</p>
-                <p>₱{Math.round(props.total * 0.05)}.00</p>
+                <p>₱0.00</p>
               </div>
             </li>
             <li className="list-group-item">
