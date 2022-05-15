@@ -59,7 +59,10 @@ function Login() {
       var customer = send["data"]["customer"];
 
       // save JWT to localStorage
-      localStorage.setItem("jwt", `Bearer ${send["data"]["token"]}`);
+      localStorage.setItem(
+        "jwt",
+        JSON.stringify(`Bearer ${send["data"]["token"]}`)
+      );
 
       // context
       // why save function to variable,

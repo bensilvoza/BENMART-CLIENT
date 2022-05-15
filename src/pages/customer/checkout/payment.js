@@ -36,9 +36,19 @@ function Payment() {
     };
 
     // communicate to the backend
+    // JWT
+    var token = JSON.parse(localStorage.getItem("jwt"));
+
+    var config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    };
     var send = await axios.post(
       "http://localhost:5000/orders",
-      orderInformation
+      orderInformation,
+      config
     );
 
     if (send["data"]["message"] == "OK") {
