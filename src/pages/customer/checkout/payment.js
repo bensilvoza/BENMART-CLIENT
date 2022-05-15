@@ -25,6 +25,11 @@ function Payment() {
   var [orders, setOrders] = React.useState([]);
   var [orderTotal, setOrderTotal] = React.useState(0);
 
+  // payment method
+  var [cod, setCod] = React.useState(false);
+  var [gcash, setGcash] = React.useState(false);
+  var [paypal, setPaypal] = React.useState(false);
+
   async function handleCompleteOrder() {
     var orderInformation = {
       ID: Math.floor(Math.random() * 1000000000),
@@ -33,6 +38,19 @@ function Payment() {
       total: orderTotal,
       paymentMethod: "cod",
       paid: false,
+    };
+
+    // paypal
+    var createPaymentJSON = {
+      intent: "sale",
+      payer: {
+        payment_method: "paypal",
+      },
+      redirect_urls: {
+        return_url: "http://localhost:3000/payment/success",
+        cancel_url: "http://localhost:3000/payment",
+      },
+      transactions: [{ amount: { currency: "PHP", total: orderTotal } }],
     };
 
     // communicate to the backend
@@ -108,7 +126,26 @@ function Payment() {
 
         <Cell span={6}>
           <Space height="1rem" />
-          <PaymentMethod />
+          <PaymentMethod
+            cod={cod}
+            onChangeCod={function (e) {
+              setGcash(false);
+              setPaypal(false);
+              setCod(e.target.checked);
+            }}
+            gcash={gcash}
+            onChangeGcash={function (e) {
+              setCod(false);
+              setPaypal(false);
+              setGcash(e.target.checked);
+            }}
+            paypal={paypal}
+            onChangePaypal={function (e) {
+              setCod(false);
+              setGcash(false);
+              setPaypal(e.target.checked);
+            }}
+          />
           <Space height="1.5rem" />
           <Button
             kind={KIND.tertiary}

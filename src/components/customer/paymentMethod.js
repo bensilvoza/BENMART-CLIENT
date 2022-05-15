@@ -1,10 +1,8 @@
 import * as React from "react";
 import { Checkbox, LABEL_PLACEMENT } from "baseui/checkbox";
 
-function PaymentMethod() {
-  var [cod, setCod] = React.useState(false);
-  var [gcash, setGcash] = React.useState(false);
-  var [paypal, setPaypal] = React.useState(false);
+function PaymentMethod(props) {
+  // put the state here
 
   return (
     <>
@@ -26,24 +24,24 @@ function PaymentMethod() {
 
       <div>
         <Checkbox
-          checked={cod}
-          onChange={(e) => setCod(e.target.checked)}
+          checked={props.cod}
+          onChange={props.onChangeCod}
           labelPlacement={LABEL_PLACEMENT.right}
         >
           Cash on Delivery
         </Checkbox>
 
         <Checkbox
-          checked={gcash}
-          onChange={(e) => setGcash(e.target.checked)}
+          checked={props.gcash}
+          onChange={props.onChangeGcash}
           labelPlacement={LABEL_PLACEMENT.right}
         >
           Gcash
         </Checkbox>
 
         <Checkbox
-          checked={paypal}
-          onChange={(e) => setPaypal(e.target.checked)}
+          checked={props.paypal}
+          onChange={props.onChangePaypal}
           labelPlacement={LABEL_PLACEMENT.right}
         >
           <div>Paypal</div>
