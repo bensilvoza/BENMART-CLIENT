@@ -30,12 +30,12 @@ function PersonalInformation(props) {
     <Cell span={8}>
       <Accordion allowToggle>
         <AccordionItem
-          style={{ borderBottom: "1px solid black", borderTop: "white" }}
+          style={{ border: "1px solid black", borderRadius: ".2rem" }}
         >
           <h2>
             <AccordionButton>
               <Box style={{ padding: "1rem" }} flex="1" textAlign="left">
-                Personal Information
+                PERSONAL INFORMATION DETAILS
               </Box>
               <AccordionIcon />
             </AccordionButton>

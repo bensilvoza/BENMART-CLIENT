@@ -14,7 +14,7 @@ import HomepageBanner from "../../components/customer/homepageBanner";
 import { LoginContext } from "../../contexts/customer/loginContext";
 
 // components
-import HeaderNavigation from "../../components/customer/headerNavigation";
+import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
 import PersonalInformation from "../../components/customer/personalInformation";
 import Orders from "../../components/customer/orders";
 import Foooter from "../../components/customer/footer";
@@ -91,8 +91,7 @@ function Account() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
-          <HeaderNavigation
+          <HeaderNavigationCompact
             onClickProducts={handleClickProducts}
             onClickCart={handleClickCart}
             onClickAccount={handleClickAccount}

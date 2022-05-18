@@ -14,7 +14,7 @@ import { Notification, KIND as NOTIFICATIONKIND } from "baseui/notification";
 import { LoginContext } from "../../contexts/customer/loginContext";
 
 // components
-import HeaderNavigation from "../../components/customer/headerNavigation";
+import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
 import LoginForm from "../../components/customer/loginForm";
 import Foooter from "../../components/customer/footer";
 import Space from "../../components/customer/space";
@@ -95,8 +95,7 @@ function Login() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
-          <HeaderNavigation onClickProducts={handleClickProducts} />
+          <HeaderNavigationCompact onClickProducts={handleClickProducts} />
         </Cell>
 
         <Cell span={6}>

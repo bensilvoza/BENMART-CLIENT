@@ -10,7 +10,7 @@ import { Button } from "baseui/button";
 import { LoginContext } from "../../../contexts/customer/loginContext";
 
 // components
-import HeaderNavigation from "../../../components/customer/headerNavigation";
+import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
 import CartItems from "../../../components/customer/cartItems";
 import Notification from "../../../components/customer/notification";
 import Space from "../../../components/customer/space";
@@ -142,9 +142,8 @@ function Cart() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
           <div style={{ visibility: showNotif ? "hidden" : "visible" }}>
-            <HeaderNavigation />
+            <HeaderNavigationCompact />
           </div>
           <Space height="1rem" />
         </Cell>

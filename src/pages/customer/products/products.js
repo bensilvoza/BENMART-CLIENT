@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // components
-import HeaderNavigation from "../../../components/customer/headerNavigation";
+import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
 import ProductCard from "../../../components/customer/productCard";
 import Foooter from "../../../components/customer/footer";
 import Space from "../../../components/customer/space";
@@ -51,9 +51,9 @@ function Products() {
 
   return (
     <>
-      <h1>
+      {/*
         note: add sidebar to products page inspired from bench online store
-      </h1>
+      */}
       <Grid
         overrides={{
           Grid: {
@@ -65,8 +65,7 @@ function Products() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
-          <HeaderNavigation />
+          <HeaderNavigationCompact />
           <Space height="3rem" />
         </Cell>
 

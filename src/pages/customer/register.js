@@ -11,7 +11,7 @@ import { Grid, Cell } from "baseui/layout-grid";
 import { Notification } from "baseui/notification";
 
 // components
-import HeaderNavigation from "../../components/customer/headerNavigation";
+import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
 import RegisterForm from "../../components/customer/registerForm";
 import Space from "../../components/customer/space";
 
@@ -79,8 +79,7 @@ function Register() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
-          <HeaderNavigation onClickProducts={handleClickProducts} />
+          <HeaderNavigationCompact onClickProducts={handleClickProducts} />
         </Cell>
 
         <Cell span={6}>

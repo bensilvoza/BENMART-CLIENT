@@ -5,7 +5,6 @@ import axios from "axios";
 
 // components
 import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
-import HeaderNavigation from "../../components/customer/headerNavigation";
 import CategoryCard from "../../components/customer/categoryCard";
 import ProductCard from "../../components/customer/productCard";
 import FeedbackCard from "../../components/customer/feedbackCard";
@@ -82,7 +81,6 @@ function Home() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
           <HeaderNavigationCompact
             onClickProducts={handleClickProducts}
             onClickCart={handleClickCart}

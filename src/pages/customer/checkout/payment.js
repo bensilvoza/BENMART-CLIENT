@@ -11,7 +11,7 @@ import { Grid, Cell } from "baseui/layout-grid";
 import { Button, KIND } from "baseui/button";
 
 // components
-import HeaderNavigation from "../../../components/customer/headerNavigation";
+import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
 import CheckoutNavigation from "../../../components/customer/checkoutNavigation";
 import PaymentMethod from "../../../components/customer/paymentMethod";
 import Space from "../../../components/customer/space";
@@ -53,6 +53,22 @@ function Payment() {
       transactions: [{ amount: { currency: "PHP", total: orderTotal } }],
     };
 
+    // load or data
+    var load = {
+      paymentMethod: "paypal",
+      createPaymentJSON: createPaymentJSON,
+    };
+
+    // Paypal payment method
+    // communicate to the backend
+    if (paypal === true) {
+      var send = await axios.post("http://localhost:5000/payment", load);
+
+      // terminate
+      return;
+    }
+
+    // COD payment method
     // communicate to the backend
     // JWT
     var token = JSON.parse(localStorage.getItem("jwt"));
@@ -113,8 +129,7 @@ function Payment() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
-          <HeaderNavigation />
+          <HeaderNavigationCompact />
           <Space height="3rem" />
         </Cell>
 

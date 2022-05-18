@@ -14,7 +14,7 @@ import parse from "html-react-parser";
 import { Grid, Cell } from "baseui/layout-grid";
 
 // components
-import HeaderNavigation from "../../../components/customer/headerNavigation";
+import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
 import Foooter from "../../../components/customer/footer";
 import ProductDetailsInfoAndCart from "../../../components/customer/productDetailsInfoAndCart";
 import Notification from "../../../components/customer/addToCartNotification";
@@ -143,8 +143,7 @@ function Product() {
         }}
       >
         <Cell span={12}>
-          <Space height="2rem" />
-          <HeaderNavigation onClickProducts={handleClickProducts} />
+          <HeaderNavigationCompact onClickProducts={handleClickProducts} />
           <Space height="4rem" />
         </Cell>
 
