@@ -1,0 +1,15 @@
+.box {
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+}
+
+.shop-by {
+    font-family: Montserrat;
+    font-size: 1.5rem;
+    padding: 1.2rem;
+}
+
+.field {
+    font-family: Montserrat;
+    font-size: 1.1rem;
+}

@@ -7,6 +7,7 @@ import axios from "axios";
 import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
 import ProductCard from "../../../components/customer/productCard";
 import Foooter from "../../../components/customer/footer";
+import ProductsFilter from "../../../components/customer/productsFilter";
 import Space from "../../../components/customer/space";
 
 // HTML parser
@@ -67,6 +68,10 @@ function Products() {
         <Cell span={12}>
           <HeaderNavigationCompact />
           <Space height="3rem" />
+        </Cell>
+
+        <Cell span={3}>
+          <ProductsFilter />
         </Cell>
 
         <Cell span={12}>
