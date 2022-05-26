@@ -8,6 +8,8 @@ import HeaderNavigationCompact from "../../../components/customer/headerNavigati
 import ProductCard from "../../../components/customer/productCard";
 import Foooter from "../../../components/customer/footer";
 import ProductsFilter from "../../../components/customer/productsFilter";
+import CompareProducts from "../../../components/customer/compareProducts";
+import wishList from "../../../components/customer/wishList";
 import Space from "../../../components/customer/space";
 
 // HTML parser
@@ -15,6 +17,7 @@ import parse from "html-react-parser";
 
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
+import WishList from "../../../components/customer/wishList";
 
 // note
 // add sidebar to products page
@@ -55,16 +58,7 @@ function Products() {
       {/*
         note: add sidebar to products page inspired from bench online store
       */}
-      <Grid
-        overrides={{
-          Grid: {
-            style: {
-              display: "flex",
-              justifyContent: "center",
-            },
-          },
-        }}
-      >
+      <Grid>
         <Cell span={12}>
           <HeaderNavigationCompact />
           <Space height="3rem" />
@@ -72,18 +66,11 @@ function Products() {
 
         <Cell span={3}>
           <ProductsFilter />
-        </Cell>
-
-        <Cell span={12}>
-          <p
-            style={{
-              fontFamily: "Montserrat",
-              fontSize: "1.5rem",
-              marginTop: "2rem",
-            }}
-          >
-            Browse Products
-          </p>
+          <Space height="1rem" />
+          <CompareProducts />
+          <Space height="1rem" />
+          <WishList />
+          <Space height="1rem" />
         </Cell>
 
         {products.map((product, index) => (
