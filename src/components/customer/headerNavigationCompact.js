@@ -17,8 +17,9 @@ function HeaderNavigationCompact(props) {
           fontFamily: "Montserrat",
           fontSize: "1.1rem",
           fontWeight: "500",
-          backgroundColor: "#F5F5F5",
+          /* backgroundColor: "#F5F5F5", */
           padding: "2rem",
+          borderBottom: "1px solid lightgray",
         }}
       >
         <p style={{ cursor: "pointer" }} onClick={handleClickBenmart}>

@@ -6,16 +6,20 @@ function CategoryCard(props) {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
         border: "1px dashed black",
-        borderRadius: "2%",
-        width: "17rem",
-        height: "15rem",
-        fontFamily: "Pacifico",
-        fontSize: "2rem",
+        borderRadius: ".5rem",
+        padding: "5rem",
       }}
     >
-      <div style={{ color: "gray" }}>{props.name}</div>
+      <img
+        style={{
+          width: "100%",
+          height: "10rem",
+          objectFit: "contain",
+        }}
+        src={props.url}
+        alt="img"
+      />
     </div>
   );
 }

@@ -21,15 +21,15 @@ import HomepageBanner from "../../components/customer/homepageBanner";
 function Home() {
   const navigate = useNavigate();
 
-  var categories = [
-    "Fragrances",
-    "Watch",
-    "Shirts",
-    "Premuim Tees",
-    "Jeans",
-    "Cap",
-    "Flip flops",
-    "Shorts",
+  var categoryIconUrls = [
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748846/BENMART/perfume_tgbkpz.png",
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748846/BENMART/wall-clock_u1lpck.png",
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/tshirt_kzjp1i.png",
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653749726/BENMART/cloth_p3kffz.png",
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/jeans_kqg4vp.png",
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/cap_beenkb.png",
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/flip-flops_e14cb5.png",
+    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/football-shorts_wyjn53.png",
   ];
   var [products, setProducts] = React.useState([]);
 
@@ -43,6 +43,10 @@ function Home() {
 
   function handleClickAccount() {
     navigate("/login");
+  }
+
+  function handleClickProduct(ID) {
+    navigate("/products/" + ID);
   }
 
   // destroy is not a function
@@ -64,9 +68,6 @@ function Home() {
     }
     run();
   }, []);
-
-  // count every render
-  // console.log("render: " + Math.random());
 
   return (
     <>
@@ -104,9 +105,9 @@ function Home() {
           </p>
         </Cell>
 
-        {categories.map((category, index) => (
+        {categoryIconUrls.map((categoryIconUrl, index) => (
           <Cell span={3}>
-            <CategoryCard name={category} />
+            <CategoryCard url={categoryIconUrl} />
             {index + 1 === 4 && <Space height="1rem" />}
           </Cell>
         ))}
@@ -130,6 +131,9 @@ function Home() {
               price={product["price"]}
               name={product["name"]}
               description={parse(product["description"].substring(0, 100))}
+              onClickProduct={function () {
+                handleClickProduct(product["ID"]);
+              }}
             />
             {index % 2 === 1 && <Space height="1rem" />}
           </Cell>
