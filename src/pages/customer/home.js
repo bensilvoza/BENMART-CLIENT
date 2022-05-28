@@ -34,6 +34,7 @@ function Home() {
   var [products, setProducts] = React.useState([]);
 
   function handleClickProducts() {
+    // this is a temporary comment, will be deleted
     navigate("/products");
   }
 
