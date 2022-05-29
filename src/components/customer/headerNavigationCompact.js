@@ -1,6 +1,15 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
+// base web
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalButton,
+} from "baseui/modal";
+
 function HeaderNavigationCompact(props) {
   const navigate = useNavigate();
 
@@ -37,7 +46,7 @@ function HeaderNavigationCompact(props) {
         <p style={{ cursor: "pointer" }} onClick={props.onClickAccount}>
           Account
         </p>
-        <div>
+        <div style={{ cursor: "pointer" }}>
           <span>
             <i className="bi bi-search m-0"></i>
           </span>
