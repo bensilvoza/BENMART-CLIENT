@@ -1,27 +1,25 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-// base web
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  ModalButton,
-} from "baseui/modal";
+// context
+import { IsOpenSearchModalContext } from "../../contexts/customer/isOpenSearchModalContext";
 
-// ...
+// components
+import SearchModal from "./searchModal";
+
 function HeaderNavigationCompact(props) {
   const navigate = useNavigate();
 
-  // search modal
-  const [isOpen, setIsOpen] = React.useState(false);
-  function close() {
-    setIsOpen(false);
-  }
+  // context
+  var { handleIsOpen } = React.useContext(IsOpenSearchModalContext);
 
   function handleClickBenmart() {
     navigate("/");
+  }
+
+  function handleClickOpenSearchModal() {
+    var handleIsOpenMate = handleIsOpen;
+    handleIsOpenMate();
   }
 
   return (
@@ -53,10 +51,11 @@ function HeaderNavigationCompact(props) {
         <p style={{ cursor: "pointer" }} onClick={props.onClickAccount}>
           Account
         </p>
-        <div style={{ cursor: "pointer" }}>
+        <div onClick={handleClickOpenSearchModal} style={{ cursor: "pointer" }}>
           <span>
             <i className="bi bi-search m-0"></i>
           </span>
+          <SearchModal />
         </div>
       </div>
     </div>

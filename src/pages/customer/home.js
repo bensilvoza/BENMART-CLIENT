@@ -39,7 +39,6 @@ function Home() {
 
   function handleClickCart() {
     navigate("/cart");
-    // ...
   }
 
   function handleClickAccount() {
