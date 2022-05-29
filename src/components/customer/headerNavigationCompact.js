@@ -10,6 +10,7 @@ import {
   ModalButton,
 } from "baseui/modal";
 
+// ...
 function HeaderNavigationCompact(props) {
   const navigate = useNavigate();
 
