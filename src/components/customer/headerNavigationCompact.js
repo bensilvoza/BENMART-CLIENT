@@ -13,6 +13,12 @@ import {
 function HeaderNavigationCompact(props) {
   const navigate = useNavigate();
 
+  // search modal
+  const [isOpen, setIsOpen] = React.useState(false);
+  function close() {
+    setIsOpen(false);
+  }
+
   function handleClickBenmart() {
     navigate("/");
   }
