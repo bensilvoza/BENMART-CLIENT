@@ -6,6 +6,9 @@ import AddToCartNotification from "./addToCartNotification";
 import { Button } from "baseui/button";
 import Product from "../../pages/customer/products/product";
 
+// utils
+import thousandSeparator from "../../utils/customer/thousandSeparator";
+
 function ProductDetailsInfoAndCart(props) {
   // put the state here
   return (
@@ -78,7 +81,7 @@ function ProductDetailsInfoAndCart(props) {
           </div>
 
           <div style={{ fontSize: "2rem" }}>
-            ₱{props.price * props.orderQuantity}.00
+            ₱{thousandSeparator(props.price * props.orderQuantity)}.00
           </div>
         </div>
       )}

@@ -8,6 +8,7 @@ import {
   ModalFooter,
   ModalButton,
 } from "baseui/modal";
+import { Input, SIZE } from "baseui/input";
 
 function SearchModal(props) {
   return (
@@ -26,10 +27,14 @@ function SearchModal(props) {
           },
         }}
       >
-        <ModalHeader>Hello world</ModalHeader>
+        <ModalHeader>Shop now at BENMART!</ModalHeader>
         <ModalBody style={{ flex: "1 1 0" }}>
-          Proin ut dui sed metus pharetra hend rerit vel non mi. Nulla ornare
-          faucibus ex, non facilisis nisl. Maecenas aliquet mauris ut tempus.
+          <Input
+            value={props.query}
+            onChange={props.onChangeQuery}
+            size={SIZE.large}
+            placeholder="search our store..."
+          />
         </ModalBody>
         <ModalFooter>
           <ModalButton onClick={props.close}>Close</ModalButton>

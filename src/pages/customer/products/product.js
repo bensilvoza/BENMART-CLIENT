@@ -100,7 +100,7 @@ function Product() {
       setNotificationMessage("");
       setNotificationBorderColor("");
       setNotificationMessageColor("");
-    }, 10000);
+    }, 5000);
   }
 
   // destroy is not a function
@@ -181,7 +181,7 @@ function Product() {
         )}
 
         <Cell span={12}>
-          <Space height="5rem" />
+          <Space height="15rem" />
         </Cell>
       </Grid>
 

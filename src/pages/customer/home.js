@@ -3,6 +3,9 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// contexts
+import { ProductsContext } from "../../contexts/customer/productsContext";
+
 // components
 import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
 import CategoryCard from "../../components/customer/categoryCard";
@@ -21,6 +24,9 @@ import HomepageBanner from "../../components/customer/homepageBanner";
 function Home() {
   const navigate = useNavigate();
 
+  // context
+  var { products, handleProducts } = React.useContext(ProductsContext);
+
   var categoryIconUrls = [
     "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748846/BENMART/perfume_tgbkpz.png",
     "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748846/BENMART/wall-clock_u1lpck.png",
@@ -31,8 +37,8 @@ function Home() {
     "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/flip-flops_e14cb5.png",
     "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/football-shorts_wyjn53.png",
   ];
-  var [products, setProducts] = React.useState([]);
 
+  var [showProducts, setShowProducts] = React.useState([]);
   var [isOpen, setIsOpen] = React.useState(false);
 
   function handleClickProducts() {
@@ -62,19 +68,35 @@ function Home() {
   // destroy is not a function
   // error occured when you put
   // async function in useEffect
-  // parent loop
+  // parent parameter
   React.useEffect(function () {
     async function run() {
-      async function getProducts() {
-        var products = await axios.get("http://localhost:5000/");
-        return products["data"];
+      if (products.length == 0) {
+        // currently products is empty
+        async function getProducts() {
+          var response = await axios.get("http://localhost:5000/");
+          return response["data"];
+        }
+
+        var response = await getProducts();
+
+        // save products as global variable
+        // some sort of a database
+        handleProducts(response);
+
+        var productsCopy = [];
+        for (var i = 0; i <= 11; i++) {
+          productsCopy.push(response[i]);
+        }
+        setShowProducts(productsCopy);
+      } else {
+        // currently products has data
+        var productsCopy = [];
+        for (var i = 0; i <= 11; i++) {
+          productsCopy.push(products[i]);
+        }
+        setShowProducts(productsCopy);
       }
-      var products = await getProducts();
-      var productsCopy = [];
-      for (var i = 0; i <= 11; i++) {
-        productsCopy.push(products[i]);
-      }
-      setProducts(productsCopy);
     }
     run();
   }, []);
