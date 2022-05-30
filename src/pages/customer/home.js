@@ -33,6 +33,8 @@ function Home() {
   ];
   var [products, setProducts] = React.useState([]);
 
+  var [isOpen, setIsOpen] = React.useState(false);
+
   function handleClickProducts() {
     navigate("/products");
   }
@@ -47,6 +49,14 @@ function Home() {
 
   function handleClickProduct(ID) {
     navigate("/products/" + ID);
+  }
+
+  function handleClickOpenSearchModal() {
+    setIsOpen(true);
+  }
+
+  function handleClickCloseSearchModal() {
+    setIsOpen(false);
   }
 
   // destroy is not a function
@@ -86,6 +96,9 @@ function Home() {
             onClickProducts={handleClickProducts}
             onClickCart={handleClickCart}
             onClickAccount={handleClickAccount}
+            close={handleClickCloseSearchModal}
+            isOpen={isOpen}
+            handleClickOpenSearchModal={handleClickOpenSearchModal}
           />
 
           <Space height="3rem" />

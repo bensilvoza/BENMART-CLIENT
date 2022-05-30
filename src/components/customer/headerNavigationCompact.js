@@ -1,25 +1,14 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-// context
-import { IsOpenSearchModalContext } from "../../contexts/customer/isOpenSearchModalContext";
-
 // components
 import SearchModal from "./searchModal";
 
 function HeaderNavigationCompact(props) {
   const navigate = useNavigate();
 
-  // context
-  var { handleIsOpen } = React.useContext(IsOpenSearchModalContext);
-
   function handleClickBenmart() {
     navigate("/");
-  }
-
-  function handleClickOpenSearchModal() {
-    var handleIsOpenMate = handleIsOpen;
-    handleIsOpenMate();
   }
 
   return (
@@ -27,7 +16,7 @@ function HeaderNavigationCompact(props) {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-evenly",
+          justifyContent: "space-between",
           fontFamily: "Montserrat",
           fontSize: "1.1rem",
           fontWeight: "500",
@@ -51,12 +40,15 @@ function HeaderNavigationCompact(props) {
         <p style={{ cursor: "pointer" }} onClick={props.onClickAccount}>
           Account
         </p>
-        <div onClick={handleClickOpenSearchModal} style={{ cursor: "pointer" }}>
+        <div
+          onClick={props.handleClickOpenSearchModal}
+          style={{ cursor: "pointer" }}
+        >
           <span>
             <i className="bi bi-search m-0"></i>
           </span>
-          <SearchModal />
         </div>
+        <SearchModal close={props.close} isOpen={props.isOpen} />
       </div>
     </div>
   );
