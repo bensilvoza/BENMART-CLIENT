@@ -3,6 +3,9 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+// contexts
+import { ProductsContext } from "../../../contexts/customer/productsContext";
+
 // HTML parser
 import parse from "html-react-parser";
 
@@ -21,7 +24,10 @@ import Space from "../../../components/customer/space";
 function Products() {
   const navigate = useNavigate();
 
-  var [products, setProducts] = React.useState([]);
+  // context
+  var { products } = React.useContext(ProductsContext);
+
+  var [productsCopy, setProductsCopy] = React.useState([]);
 
   function handleClickProduct(ID) {
     navigate("/products/" + ID);
@@ -33,12 +39,7 @@ function Products() {
   // parent loop
   React.useEffect(function () {
     async function run() {
-      async function getProducts() {
-        var response = await axios.get("http://localhost:5000/products");
-        return response["data"];
-      }
-
-      var response = await getProducts();
+      var response = products;
       var bundle = [];
       var p = [];
       for (var i = 0; i < response.length; i++) {
@@ -49,7 +50,7 @@ function Products() {
         }
       }
 
-      setProducts(bundle);
+      setProductsCopy(bundle);
     }
     run();
   }, []);
@@ -79,7 +80,7 @@ function Products() {
         </Cell>
 
         <Cell span={9}>
-          {products.map((product, index) => (
+          {productsCopy.map((product, index) => (
             <>
               {/* element need to bundle to 3 per div => <div> <> <> <> </div> */}
               <div

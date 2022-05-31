@@ -6,6 +6,7 @@ import Fade from "react-reveal/Fade";
 
 // context
 import { LoginContext } from "../../../contexts/customer/loginContext";
+import { ProductsContext } from "../../../contexts/customer/productsContext";
 
 // HTML parser
 import parse from "html-react-parser";
@@ -26,6 +27,7 @@ function Product() {
 
   // context
   var { customer, isAuthenticated } = React.useContext(LoginContext);
+  var { products } = React.useContext(ProductsContext);
 
   var [product, setProduct] = React.useState(undefined);
   var [showIsAuthenticatedMessage, setShowIsAuthenticatedMessage] =
@@ -106,19 +108,16 @@ function Product() {
   // destroy is not a function
   // error occured when you put
   // async function in useEffect
-  // parent loop
+  // parent parameter
   React.useEffect(function () {
     async function run() {
       var productID = ID;
-      async function getProduct() {
-        var response = await axios.get(
-          "http://localhost:5000/products/" + productID
-        );
-        return response["data"];
-      }
 
-      var product = await getProduct();
-      setProduct(product);
+      for (var i = 0; i < products.length; i++) {
+        if (products[i]["ID"] == productID) {
+          return setProduct(products[i]);
+        }
+      }
     }
     run();
   }, []);
