@@ -84,6 +84,7 @@ function Products() {
   console.log(category);
   console.log(priceSlider);
   console.log(products);
+  console.log("a products copy");
   console.log(productsCopy);
 
   return (
@@ -115,37 +116,35 @@ function Products() {
           <Space height="1rem" />
         </Cell>
 
+        {/* element need to bundle max of 3 per div => <div> <> <> <> </div> */}
         <Cell span={9}>
-          {productsCopy.map((chunk, index) => (
-            <>
-              {/* element need to bundle max of 3 per div => <div> <> <> <> </div> */}
-              <div
-                key={Math.floor(Math.random() * 1000000000)}
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                {chunk.map((product, index) => (
-                  <div style={{ width: "30%" }} key={product[index]["ID"]}>
-                    <ProductCard
-                      url={product[index]["images"][0]["url"]}
-                      price={product[index]["price"]}
-                      name={product[index]["name"]}
-                      description={parse(
-                        product[0]["description"].substring(0, 100)
-                      )}
-                      onClickProduct={function () {
-                        handleClickProduct(product[index]["ID"]);
-                      }}
-                    />
-                  </div>
-                ))}
+          {productsCopy.map((chunk) => (
+            <div
+              key={Math.floor(Math.random() * 1000000000)}
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {chunk.map((product, index) => (
+                <div style={{ width: "30%" }} key={product[index]["ID"]}>
+                  <ProductCard
+                    url={product["images"][0]["url"]}
+                    price={product["price"]}
+                    name={product["name"]}
+                    description={parse(
+                      product[0]["description"].substring(0, 100)
+                    )}
+                    onClickProduct={function () {
+                      handleClickProduct(product["ID"]);
+                    }}
+                  />
+                </div>
+              ))}
 
-                <Space height="1rem" />
-              </div>
-            </>
+              <Space height="1rem" />
+            </div>
           ))}
         </Cell>
 
