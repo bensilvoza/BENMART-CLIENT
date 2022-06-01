@@ -12,8 +12,8 @@ import { Slider } from "baseui/slider";
 import { Select } from "baseui/select";
 
 function ProductsFilter(props) {
-  var [priceSlider, setPriceSlider] = React.useState([0]);
-  var [category, setCategory] = React.useState([]);
+  // put the state here
+
   return (
     <div className="box">
       <p className="shop-by">Shop By</p>
@@ -28,9 +28,9 @@ function ProductsFilter(props) {
               { label: "Shorts", id: "5" },
               { label: "Perfume", id: "6" },
             ]}
-            value={category}
+            value={props.category}
             placeholder="Choose"
-            onChange={(params) => setCategory(params.value)}
+            onChange={props.onChangeCategory}
           />
         </Panel>
         <Panel title="Price">
@@ -39,8 +39,8 @@ function ProductsFilter(props) {
             <Slider
               min="0"
               max="2000"
-              value={priceSlider}
-              onChange={({ value }) => value && setPriceSlider(value)}
+              value={props.priceSlider}
+              onChange={props.onChangePriceSlider}
             />
           </div>
         </Panel>

@@ -9,7 +9,7 @@ import { Button, KIND } from "baseui/button";
 import Space from "./space";
 
 // utils
-import thousandSeparator from "../../utils/customer/thousandSeparator";
+import thousandSeparator from "../../utils/thousandSeparator";
 
 function Orders(props) {
   // put the state here

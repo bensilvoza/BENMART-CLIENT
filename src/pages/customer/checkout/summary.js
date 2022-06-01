@@ -16,9 +16,6 @@ import CheckoutNavigation from "../../../components/customer/checkoutNavigation"
 import OrderSummary from "../../../components/customer/orderSummary";
 import Space from "../../../components/customer/space";
 
-// utils
-import compareAddress from "../../../utils/customer/compareAddress";
-
 function Summary() {
   const navigate = useNavigate();
 

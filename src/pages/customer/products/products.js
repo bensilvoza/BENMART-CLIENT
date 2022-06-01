@@ -21,6 +21,11 @@ import CompareProducts from "../../../components/customer/compareProducts";
 import WishList from "../../../components/customer/wishList";
 import Space from "../../../components/customer/space";
 
+// utils
+import bundler from "../../../utils/bundler";
+import categoryFilter from "../../../utils/categoryFilter";
+import priceFilter from "../../../utils/priceFilter";
+
 function Products() {
   const navigate = useNavigate();
 
@@ -28,32 +33,58 @@ function Products() {
   var { products } = React.useContext(ProductsContext);
 
   var [productsCopy, setProductsCopy] = React.useState([]);
+  var [category, setCategory] = React.useState([]);
+  var [priceSlider, setPriceSlider] = React.useState([2000]);
 
   function handleClickProduct(ID) {
     navigate("/products/" + ID);
   }
 
-  // destroy is not a function
-  // error occured when you put
-  // async function in useEffect
-  // parent loop
   React.useEffect(function () {
     async function run() {
-      var response = products;
-      var bundle = [];
-      var p = [];
-      for (var i = 0; i < response.length; i++) {
-        p.push(response[i]);
-        if (p.length == 3) {
-          bundle.push(p);
-          p = [];
-        }
-      }
-
+      var bundle = bundler(products);
       setProductsCopy(bundle);
     }
     run();
   }, []);
+
+  // category
+  React.useEffect(
+    function () {
+      async function run() {
+        var bundle = undefined;
+
+        if (category.length == 0) {
+          // if no category selected
+          bundle = bundler(products);
+        } else {
+          var result = categoryFilter(products, category[0]["label"]);
+          bundle = bundler(result);
+        }
+        setProductsCopy(bundle);
+      }
+      run();
+    },
+    [category]
+  );
+
+  // price slider or range
+  React.useEffect(
+    function () {
+      async function run() {
+        var result = priceFilter(products, priceSlider[0]);
+        var bundle = bundler(result);
+        setProductsCopy(bundle);
+      }
+      run();
+    },
+    [priceSlider]
+  );
+
+  console.log(category);
+  console.log(priceSlider);
+  console.log(products);
+  console.log(productsCopy);
 
   return (
     <>
@@ -71,7 +102,12 @@ function Products() {
         </Cell>
 
         <Cell span={3}>
-          <ProductsFilter />
+          <ProductsFilter
+            category={category}
+            onChangeCategory={(params) => setCategory(params.value)}
+            priceSlider={priceSlider}
+            onChangePriceSlider={({ value }) => value && setPriceSlider(value)}
+          />
           <Space height="1rem" />
           <CompareProducts />
           <Space height="1rem" />
@@ -80,9 +116,9 @@ function Products() {
         </Cell>
 
         <Cell span={9}>
-          {productsCopy.map((product, index) => (
+          {productsCopy.map((chunk, index) => (
             <>
-              {/* element need to bundle to 3 per div => <div> <> <> <> </div> */}
+              {/* element need to bundle max of 3 per div => <div> <> <> <> </div> */}
               <div
                 key={Math.floor(Math.random() * 1000000000)}
                 style={{
@@ -91,50 +127,24 @@ function Products() {
                   justifyContent: "space-between",
                 }}
               >
-                <div style={{ width: "30%" }} key={product[0]["ID"]}>
-                  <ProductCard
-                    url={product[0]["images"][0]["url"]}
-                    price={product[0]["price"]}
-                    name={product[0]["name"]}
-                    description={parse(
-                      product[0]["description"].substring(0, 100)
-                    )}
-                    onClickProduct={function () {
-                      handleClickProduct(product[0]["ID"]);
-                    }}
-                  />
-                </div>
+                {chunk.map((product, index) => (
+                  <div style={{ width: "30%" }} key={product[index]["ID"]}>
+                    <ProductCard
+                      url={product[index]["images"][0]["url"]}
+                      price={product[index]["price"]}
+                      name={product[index]["name"]}
+                      description={parse(
+                        product[0]["description"].substring(0, 100)
+                      )}
+                      onClickProduct={function () {
+                        handleClickProduct(product[index]["ID"]);
+                      }}
+                    />
+                  </div>
+                ))}
 
-                <div style={{ width: "30%" }} key={product[0]["ID"]}>
-                  <ProductCard
-                    url={product[1]["images"][0]["url"]}
-                    price={product[1]["price"]}
-                    name={product[1]["name"]}
-                    description={parse(
-                      product[1]["description"].substring(0, 100)
-                    )}
-                    onClickProduct={function () {
-                      handleClickProduct(product[1]["ID"]);
-                    }}
-                  />
-                </div>
-
-                <div style={{ width: "30%" }} key={product[0]["ID"]}>
-                  <ProductCard
-                    url={product[2]["images"][0]["url"]}
-                    price={product[2]["price"]}
-                    name={product[2]["name"]}
-                    description={parse(
-                      product[2]["description"].substring(0, 100)
-                    )}
-                    onClickProduct={function () {
-                      handleClickProduct(product[2]["ID"]);
-                    }}
-                  />
-                </div>
+                <Space height="1rem" />
               </div>
-
-              <Space height="1rem" />
             </>
           ))}
         </Cell>

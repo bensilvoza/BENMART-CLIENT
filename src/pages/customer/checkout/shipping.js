@@ -16,9 +16,6 @@ import CheckoutNavigation from "../../../components/customer/checkoutNavigation"
 import AddressForm from "../../../components/customer/addressForm";
 import Space from "../../../components/customer/space";
 
-// utils
-import compareAddress from "../../../utils/customer/compareAddress";
-
 function Shipping() {
   const navigate = useNavigate();
 

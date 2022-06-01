@@ -16,7 +16,7 @@ import Notification from "../../../components/customer/notification";
 import Space from "../../../components/customer/space";
 
 // utils
-import thousandSeparator from "../../../utils/customer/thousandSeparator";
+import thousandSeparator from "../../../utils/thousandSeparator";
 
 function Cart() {
   const navigate = useNavigate();

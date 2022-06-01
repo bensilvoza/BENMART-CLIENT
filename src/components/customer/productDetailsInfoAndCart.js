@@ -7,7 +7,7 @@ import { Button } from "baseui/button";
 import Product from "../../pages/customer/products/product";
 
 // utils
-import thousandSeparator from "../../utils/customer/thousandSeparator";
+import thousandSeparator from "../../utils/thousandSeparator";
 
 function ProductDetailsInfoAndCart(props) {
   // put the state here
