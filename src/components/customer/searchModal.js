@@ -28,7 +28,7 @@ function SearchModal(props) {
   // context
   var { products } = React.useContext(ProductsContext);
 
-  var [query, setQuery] = React.useState("");
+  var [query, setQuery] = React.useState("try searching...");
 
   var [searchResults, setSearchResults] = React.useState([]);
 

@@ -4,7 +4,7 @@ function FeedbackCard(props) {
   return (
     <div
       style={{
-        border: "5px dashed gray",
+        border: "3px dashed gray",
         borderRadius: ".5rem",
         paddingTop: "1rem",
         paddingBottom: "1rem",

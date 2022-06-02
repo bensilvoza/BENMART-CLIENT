@@ -34,7 +34,7 @@ function Products() {
 
   var [productsCopy, setProductsCopy] = React.useState([]);
   var [category, setCategory] = React.useState([]);
-  var [priceSlider, setPriceSlider] = React.useState([2000]);
+  var [priceSlider, setPriceSlider] = React.useState([3000]);
 
   function handleClickProduct(ID) {
     navigate("/products/" + ID);
@@ -81,12 +81,6 @@ function Products() {
     [priceSlider]
   );
 
-  console.log(category);
-  console.log(priceSlider);
-  console.log(products);
-  console.log("a products copy");
-  console.log(productsCopy);
-
   return (
     <>
       <Grid>
@@ -110,9 +104,9 @@ function Products() {
             onChangePriceSlider={({ value }) => value && setPriceSlider(value)}
           />
           <Space height="1rem" />
-          <CompareProducts />
-          <Space height="1rem" />
           <WishList />
+          <Space height="1rem" />
+          <CompareProducts />
           <Space height="1rem" />
         </Cell>
 
@@ -128,13 +122,16 @@ function Products() {
               }}
             >
               {chunk.map((product, index) => (
-                <div style={{ width: "30%" }} key={product[index]["ID"]}>
+                <div
+                  style={{ width: "30%", marginBottom: "2rem" }}
+                  key={product["ID"]}
+                >
                   <ProductCard
                     url={product["images"][0]["url"]}
                     price={product["price"]}
                     name={product["name"]}
                     description={parse(
-                      product[0]["description"].substring(0, 100)
+                      product["description"].substring(0, 100)
                     )}
                     onClickProduct={function () {
                       handleClickProduct(product["ID"]);
@@ -142,8 +139,6 @@ function Products() {
                   />
                 </div>
               ))}
-
-              <Space height="1rem" />
             </div>
           ))}
         </Cell>

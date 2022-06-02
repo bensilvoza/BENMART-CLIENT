@@ -38,7 +38,7 @@ function ProductsFilter(props) {
           <div style={{ marginTop: "2rem" }}>
             <Slider
               min="0"
-              max="2000"
+              max="3000"
               value={props.priceSlider}
               onChange={props.onChangePriceSlider}
             />
