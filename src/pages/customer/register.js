@@ -11,9 +11,9 @@ import { Grid, Cell } from "baseui/layout-grid";
 import { Notification } from "baseui/notification";
 
 // components
-import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
-import RegisterForm from "../../components/customer/registerForm";
-import Space from "../../components/customer/space";
+import HeaderNavigationCompact from "../../components/headerNavigationCompact";
+import RegisterForm from "../../components/registerForm";
+import Space from "../../components/space";
 
 function Register() {
   const navigate = useNavigate();

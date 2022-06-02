@@ -8,17 +8,16 @@ import parse from "html-react-parser";
 
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
-import HomepageBanner from "../../components/customer/homepageBanner";
 
 // context
 import { LoginContext } from "../../contexts/customer/loginContext";
 
 // components
-import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
-import PersonalInformation from "../../components/customer/personalInformation";
-import Orders from "../../components/customer/orders";
-import Foooter from "../../components/customer/footer";
-import Space from "../../components/customer/space";
+import HeaderNavigationCompact from "../../components/headerNavigationCompact";
+import PersonalInformation from "../../components/personalInformation";
+import Orders from "../../components/orders";
+import Foooter from "../../components/footer";
+import Space from "../../components/space";
 
 function Account() {
   const navigate = useNavigate();

@@ -9,10 +9,18 @@ import { Button, KIND } from "baseui/button";
 import Space from "./space";
 
 // utils
-import thousandSeparator from "../../utils/thousandSeparator";
+import thousandSeparator from "../utils/thousandSeparator";
 
-function Orders(props) {
-  // put the state here
+function OrderSummary(props) {
+  const navigate = useNavigate();
+
+  function handleClickGoBack() {
+    navigate("/shipping");
+  }
+
+  function handleClickPayment() {
+    navigate("/payment");
+  }
 
   return (
     <>
@@ -22,21 +30,6 @@ function Orders(props) {
             fontFamily: "Montserrat",
             fontSize: "1.5rem",
             fontWeight: "700",
-            color: "#36454F",
-          }}
-        >
-          ORDER ID
-        </h1>
-        <p>{props.orderID}</p>
-        <hr />
-
-        <Space height="1rem" />
-        <h1
-          style={{
-            fontFamily: "Montserrat",
-            fontSize: "1.5rem",
-            fontWeight: "700",
-            color: "#36454F",
           }}
         >
           SHIPPING
@@ -50,12 +43,11 @@ function Orders(props) {
             fontFamily: "Montserrat",
             fontSize: "1.5rem",
             fontWeight: "700",
-            color: "#36454F",
           }}
         >
           PAYMENT METHOD
         </h1>
-        <h1>{props.paymentMethod}</h1>
+        <h1>--</h1>
         <hr />
 
         <Space height="1rem" />
@@ -64,7 +56,6 @@ function Orders(props) {
             fontFamily: "Montserrat",
             fontSize: "1.5rem",
             fontWeight: "700",
-            color: "#36454F",
           }}
         >
           ORDER ITEMS
@@ -77,7 +68,7 @@ function Orders(props) {
         ))}
       </Cell>
 
-      <Cell span={3}>
+      <Cell span={4}>
         <div>
           <ul className="list-group">
             <li
@@ -87,7 +78,6 @@ function Orders(props) {
                 fontSize: "1.5rem",
                 fontWeight: "700",
                 padding: "1.5rem",
-                color: "#36454F",
               }}
             >
               ORDER SUMMARY
@@ -114,10 +104,41 @@ function Orders(props) {
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p>Total</p>
                 <p>
-                  ₱{thousandSeparator(Math.round(props.total))}
+                  ₱
+                  {thousandSeparator(
+                    Math.round(props.total + props.total * 0.05)
+                  )}
                   .00
                 </p>
               </div>
+            </li>
+            <li className="list-group-item">
+              <Button
+                overrides={{
+                  BaseButton: {
+                    style: {
+                      width: "100%",
+                      marginBottom: ".3rem",
+                    },
+                  },
+                }}
+                onClick={handleClickPayment}
+              >
+                CONTINUE TO PAYMENT
+              </Button>
+              <Button
+                overrides={{
+                  BaseButton: {
+                    style: {
+                      width: "100%",
+                    },
+                  },
+                }}
+                kind={KIND.tertiary}
+                onClick={handleClickGoBack}
+              >
+                GO BACK TO SHIPPING
+              </Button>
             </li>
           </ul>
         </div>
@@ -126,4 +147,4 @@ function Orders(props) {
   );
 }
 
-export default Orders;
+export default OrderSummary;

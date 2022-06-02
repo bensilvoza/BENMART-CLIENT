@@ -15,11 +15,11 @@ import parse from "html-react-parser";
 import { Grid, Cell } from "baseui/layout-grid";
 
 // components
-import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
-import Foooter from "../../../components/customer/footer";
-import ProductDetailsInfoAndCart from "../../../components/customer/productDetailsInfoAndCart";
-import Notification from "../../../components/customer/addToCartNotification";
-import Space from "../../../components/customer/space";
+import HeaderNavigationCompact from "../../../components/headerNavigationCompact";
+import Foooter from "../../../components/footer";
+import ProductDetailsInfoAndCart from "../../../components/productDetailsInfoAndCart";
+import Notification from "../../../components/addToCartNotification";
+import Space from "../../../components/space";
 
 function Product() {
   const navigate = useNavigate();

@@ -4,10 +4,9 @@ import AddToCartNotification from "./addToCartNotification";
 
 // base web
 import { Button } from "baseui/button";
-import Product from "../../pages/customer/products/product";
 
 // utils
-import thousandSeparator from "../../utils/thousandSeparator";
+import thousandSeparator from "../utils/thousandSeparator";
 
 function ProductDetailsInfoAndCart(props) {
   // put the state here

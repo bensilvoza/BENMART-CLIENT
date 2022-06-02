@@ -11,10 +11,10 @@ import { Grid, Cell } from "baseui/layout-grid";
 import { Button, KIND } from "baseui/button";
 
 // components
-import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
-import CheckoutNavigation from "../../../components/customer/checkoutNavigation";
-import PaymentMethod from "../../../components/customer/paymentMethod";
-import Space from "../../../components/customer/space";
+import HeaderNavigationCompact from "../../../components/headerNavigationCompact";
+import CheckoutNavigation from "../../../components/checkoutNavigation";
+import PaymentMethod from "../../../components/paymentMethod";
+import Space from "../../../components/space";
 
 function Payment() {
   const navigate = useNavigate();

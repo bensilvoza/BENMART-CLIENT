@@ -11,10 +11,10 @@ import { Grid, Cell } from "baseui/layout-grid";
 import { Button } from "baseui/button";
 
 // components
-import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
-import CheckoutNavigation from "../../../components/customer/checkoutNavigation";
-import AddressForm from "../../../components/customer/addressForm";
-import Space from "../../../components/customer/space";
+import HeaderNavigationCompact from "../../../components/headerNavigationCompact";
+import CheckoutNavigation from "../../../components/checkoutNavigation";
+import AddressForm from "../../../components/addressForm";
+import Space from "../../../components/space";
 
 function Shipping() {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 // libraries
 import * as React from "react";
 
-import Space from "../../components/customer/space";
+import Space from "./space";
 
 // HTML parser
 import parse from "html-react-parser";

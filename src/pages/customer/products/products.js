@@ -13,13 +13,13 @@ import parse from "html-react-parser";
 import { Grid, Cell } from "baseui/layout-grid";
 
 // components
-import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
-import ProductCard from "../../../components/customer/productCard";
-import Foooter from "../../../components/customer/footer";
-import ProductsFilter from "../../../components/customer/productsFilter";
-import CompareProducts from "../../../components/customer/compareProducts";
-import WishList from "../../../components/customer/wishList";
-import Space from "../../../components/customer/space";
+import HeaderNavigationCompact from "../../../components/headerNavigationCompact";
+import ProductCard from "../../../components/productCard";
+import Foooter from "../../../components/footer";
+import ProductsFilter from "../../../components/productsFilter";
+import CompareProducts from "../../../components/compareProducts";
+import WishList from "../../../components/wishList";
+import Space from "../../../components/space";
 
 // utils
 import bundler from "../../../utils/bundler";

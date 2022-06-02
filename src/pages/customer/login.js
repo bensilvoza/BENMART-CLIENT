@@ -14,10 +14,10 @@ import { Notification, KIND as NOTIFICATIONKIND } from "baseui/notification";
 import { LoginContext } from "../../contexts/customer/loginContext";
 
 // components
-import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
-import LoginForm from "../../components/customer/loginForm";
-import Foooter from "../../components/customer/footer";
-import Space from "../../components/customer/space";
+import HeaderNavigationCompact from "../../components/headerNavigationCompact";
+import LoginForm from "../../components/loginForm";
+import Foooter from "../../components/footer";
+import Space from "../../components/space";
 
 function Login() {
   const navigate = useNavigate();

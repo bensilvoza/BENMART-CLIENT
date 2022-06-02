@@ -2,7 +2,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 // contexts
-import { ProductsContext } from "../../contexts/customer/productsContext";
+import { ProductsContext } from "../contexts/customer/productsContext";
 
 // Base Web
 import {
@@ -28,7 +28,7 @@ function SearchModal(props) {
   // context
   var { products } = React.useContext(ProductsContext);
 
-  var [query, setQuery] = React.useState("try searching...");
+  var [query, setQuery] = React.useState("");
 
   var [searchResults, setSearchResults] = React.useState([]);
 

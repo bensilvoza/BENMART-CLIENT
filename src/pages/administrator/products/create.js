@@ -16,8 +16,8 @@ import { Notification } from "baseui/notification";
 import { CreateProductContext } from "../../../contexts/administrator/products/createProductContext";
 
 // components
-import HeaderNavigation from "../../../components/administrator/products/headerNavigation";
-import Space from "../../../components/administrator/space";
+import HeaderNavigationCompact from "../../../components/headerNavigationCompact";
+import Space from "../../../components/space";
 
 function Create() {
   // context
@@ -101,7 +101,7 @@ function Create() {
       >
         <Cell span={12}>
           <Space value="2rem" />
-          <HeaderNavigation />
+          <HeaderNavigationCompact />
         </Cell>
 
         {/* space main */}

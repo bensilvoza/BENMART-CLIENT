@@ -1,7 +1,16 @@
 import * as React from "react";
+import axios from "axios";
+
+// context
+import { LoginContext } from "../contexts/customer/loginContext";
+
+// components
 import Space from "./space";
 
 function ProductCard(props) {
+  // context
+  var { customer, isAuthenticated } = React.useContext(LoginContext);
+
   var [border, setBorder] = React.useState("1px solid lightgray");
 
   function handleMouseEnter() {
@@ -10,6 +19,26 @@ function ProductCard(props) {
 
   function handleMouseLeave() {
     setBorder("1px solid lightgray");
+  }
+
+  async function handleClickHeart() {
+    if (isAuthenticated == false) {
+      // login required
+      return;
+    }
+    console.log("this is from hndle click heart");
+    console.log(props.productID);
+
+    console.log("hahahah");
+    console.log(customer);
+
+    var productID = props.productID;
+
+    // load or data
+    var load = { customerEmail: customer["email"], productID: productID };
+
+    // communicate to the backend
+    var response = await axios.post("http://localhost:5000/favorite", load);
   }
 
   return (
@@ -28,8 +57,11 @@ function ProductCard(props) {
       <div style={{ height: ".5rem" }}></div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>₱{props.price}.00</div>
-        <div style={{ color: "darkred" }}>
-          <i className="bi bi-heart"></i>
+        <div
+          style={{ color: "pink", cursor: "pointer" }}
+          onClick={handleClickHeart}
+        >
+          <i className={"bi bi-heart"}></i>
         </div>
       </div>
       <Space height=".8rem" />

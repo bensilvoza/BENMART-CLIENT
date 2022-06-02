@@ -6,20 +6,23 @@ import axios from "axios";
 // contexts
 import { ProductsContext } from "../../contexts/customer/productsContext";
 
-// components
-import HeaderNavigationCompact from "../../components/customer/headerNavigationCompact";
-import CategoryCard from "../../components/customer/categoryCard";
-import ProductCard from "../../components/customer/productCard";
-import FeedbackCard from "../../components/customer/feedbackCard";
-import Foooter from "../../components/customer/footer";
-import Space from "../../components/customer/space";
-
 // HTML parser
 import parse from "html-react-parser";
 
 // Base Web
 import { Grid, Cell } from "baseui/layout-grid";
-import HomepageBanner from "../../components/customer/homepageBanner";
+import HomepageBanner from "../../components/homepageBanner";
+
+// components
+import HeaderNavigationCompact from "../../components/headerNavigationCompact";
+import CategoryCard from "../../components/categoryCard";
+import ProductCard from "../../components/productCard";
+import FeedbackCard from "../../components/feedbackCard";
+import Foooter from "../../components/footer";
+import Space from "../../components/space";
+
+// utils
+import categoryIconUrls from "../../utils/categoryIconUrls";
 
 function Home() {
   const navigate = useNavigate();
@@ -27,19 +30,10 @@ function Home() {
   // context
   var { products, handleProducts } = React.useContext(ProductsContext);
 
-  var categoryIconUrls = [
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748846/BENMART/perfume_tgbkpz.png",
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748846/BENMART/wall-clock_u1lpck.png",
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/tshirt_kzjp1i.png",
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653749726/BENMART/cloth_p3kffz.png",
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/jeans_kqg4vp.png",
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/cap_beenkb.png",
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/flip-flops_e14cb5.png",
-    "https://res.cloudinary.com/benblog-cloudinary/image/upload/v1653748845/BENMART/football-shorts_wyjn53.png",
-  ];
-
   var [showProducts, setShowProducts] = React.useState([]);
   var [isOpen, setIsOpen] = React.useState(false);
+
+  var [heart, setHeart] = React.useState(false);
 
   function handleClickProducts() {
     navigate("/products");
@@ -65,10 +59,15 @@ function Home() {
     setIsOpen(false);
   }
 
-  // destroy is not a function
-  // error occured when you put
-  // async function in useEffect
-  // parent parameter
+  // function handleClickHeart(productID) {
+  //   console.log();
+  //   if (heart == false) {
+  //     setHeart(true);
+  //   } else {
+  //     setHeart(false);
+  //   }
+  // }
+
   React.useEffect(function () {
     async function run() {
       if (products.length == 0) {
@@ -141,7 +140,7 @@ function Home() {
         </Cell>
 
         {categoryIconUrls.map((categoryIconUrl, index) => (
-          <Cell span={3}>
+          <Cell key={categoryIconUrl} span={3}>
             <CategoryCard url={categoryIconUrl} />
             {index + 1 === 4 && <Space height="1rem" />}
           </Cell>
@@ -160,8 +159,9 @@ function Home() {
         </Cell>
 
         {products.map((product, index) => (
-          <Cell span={3}>
+          <Cell key={product["ID"]} span={3}>
             <ProductCard
+              productID={product["ID"]}
               url={product["images"][0]["url"]}
               price={product["price"]}
               name={product["name"]}
@@ -179,18 +179,6 @@ function Home() {
           <FeedbackCard />
           <Space height="6rem" />
         </Cell>
-
-        {/*
-        homepage footer image temporarily hidden
-        <Cell span={12}>
-          <div>
-            <img
-              src="https://hasura.io/static/footer-img-79b3cfc0ceb3c7e466198ae09e1d4e6e.png"
-              alt=""
-            />
-          </div>
-        </Cell>
-        */}
       </Grid>
 
       <div style={{ height: ".1rem", backgroundColor: "lightgray" }}></div>

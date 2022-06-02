@@ -10,10 +10,9 @@ import { Button } from "baseui/button";
 import { LoginContext } from "../../../contexts/customer/loginContext";
 
 // components
-import HeaderNavigationCompact from "../../../components/customer/headerNavigationCompact";
-import CartItems from "../../../components/customer/cartItems";
-import Notification from "../../../components/customer/notification";
-import Space from "../../../components/customer/space";
+import HeaderNavigationCompact from "../../../components/headerNavigationCompact";
+import CartItems from "../../../components/cartItems";
+import Space from "../../../components/space";
 
 // utils
 import thousandSeparator from "../../../utils/thousandSeparator";
@@ -100,10 +99,6 @@ function Cart() {
     }
   }
 
-  // destroy is not a function
-  // error occured when you put
-  // async function in useEffect
-  // parent loop
   React.useEffect(function () {
     async function run() {
       var orders = JSON.parse(localStorage.getItem("orders"));
@@ -123,14 +118,6 @@ function Cart() {
   console.log(orders);
   return (
     <>
-      {showNotif && (
-        <Notification
-          border={notifBorder}
-          color={notifColor}
-          message={notifMessage}
-        />
-      )}
-
       <Grid
         overrides={{
           Grid: {
@@ -142,7 +129,7 @@ function Cart() {
         }}
       >
         <Cell span={12}>
-          <div style={{ visibility: showNotif ? "hidden" : "visible" }}>
+          <div>
             <HeaderNavigationCompact />
           </div>
           <Space height="1rem" />
@@ -218,6 +205,18 @@ function Cart() {
                 }}
               ></div>
               <Button onClick={handleClickCheckout}>PROCEED TO CHECKOUT</Button>
+              <div
+                style={{
+                  color: "darkred",
+                  display: "inline",
+                  border: "1px solid darkred",
+                  padding: ".8rem",
+                  marginLeft: ".5rem",
+                  visibility: showNotif ? "visible" : "hidden",
+                }}
+              >
+                LOGIN REQUIRED
+              </div>
             </>
           )}
           <Space height="8rem" />
