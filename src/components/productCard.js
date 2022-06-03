@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 
 // context
@@ -11,7 +12,10 @@ function ProductCard(props) {
   // context
   var { customer, isAuthenticated } = React.useContext(LoginContext);
 
+  const toast = useToast();
+
   var [border, setBorder] = React.useState("1px solid lightgray");
+  var [heart, setHeart] = React.useState(false);
 
   function handleMouseEnter() {
     setBorder("1px solid black");
@@ -23,14 +27,22 @@ function ProductCard(props) {
 
   async function handleClickHeart() {
     if (isAuthenticated == false) {
-      // login required
+      // toast for login required
+      toast({
+        title: "LOGIN REQUIRED",
+        status: "warning",
+        variant: "subtle",
+        position: "top",
+        duration: "10000",
+      });
       return;
     }
-    console.log("this is from hndle click heart");
-    console.log(props.productID);
 
-    console.log("hahahah");
-    console.log(customer);
+    if (heart == false) {
+      setHeart(true);
+    } else {
+      setHeart(false);
+    }
 
     var productID = props.productID;
 
@@ -40,6 +52,24 @@ function ProductCard(props) {
     // communicate to the backend
     var response = await axios.post("http://localhost:5000/favorite", load);
   }
+
+  React.useEffect(function () {
+    async function run() {
+      if (isAuthenticated == true) {
+        async function getFavoriteProductsList() {
+          // communicate to the backend
+          var response = await axios.get("http://localhost:5000/favorite");
+          return response;
+        }
+
+        var response = await getFavoriteProductsList();
+        console.log("response");
+        console.log(response);
+      }
+    }
+
+    run();
+  });
 
   return (
     <div
@@ -61,7 +91,7 @@ function ProductCard(props) {
           style={{ color: "pink", cursor: "pointer" }}
           onClick={handleClickHeart}
         >
-          <i className={"bi bi-heart"}></i>
+          <i className={heart ? "bi bi-heart-fill" : "bi bi-heart"}></i>
         </div>
       </div>
       <Space height=".8rem" />
