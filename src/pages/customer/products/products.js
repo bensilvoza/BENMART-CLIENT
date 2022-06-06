@@ -5,6 +5,8 @@ import axios from "axios";
 
 // contexts
 import { ProductsContext } from "../../../contexts/customer/productsContext";
+import { LoginContext } from "../../../contexts/customer/loginContext";
+import { FavoriteProductsContext } from "../../../contexts/customer/favoriteProductsContext";
 
 // HTML parser
 import parse from "html-react-parser";
@@ -31,6 +33,8 @@ function Products() {
 
   // context
   var { products } = React.useContext(ProductsContext);
+  var { customer, isAuthenticated } = React.useContext(LoginContext);
+  var { handleFavoriteProducts } = React.useContext(FavoriteProductsContext);
 
   var [productsCopy, setProductsCopy] = React.useState([]);
   var [category, setCategory] = React.useState([]);
@@ -44,7 +48,19 @@ function Products() {
     async function run() {
       var bundle = bundler(products);
       setProductsCopy(bundle);
+
+      if (isAuthenticated == true) {
+        // communicate to backend
+        // and get favorite products list
+        var response = await axios.get(
+          "http://localhost:5000/favorite?email=" + customer["email"]
+        );
+        // context
+        // without using mate
+        handleFavoriteProducts(response.data);
+      }
     }
+
     run();
   }, []);
 
@@ -127,6 +143,7 @@ function Products() {
                   key={product["ID"]}
                 >
                   <ProductCard
+                    productID={product["ID"]}
                     url={product["images"][0]["url"]}
                     price={product["price"]}
                     name={product["name"]}

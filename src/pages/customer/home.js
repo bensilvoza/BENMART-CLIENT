@@ -5,6 +5,8 @@ import axios from "axios";
 
 // contexts
 import { ProductsContext } from "../../contexts/customer/productsContext";
+import { LoginContext } from "../../contexts/customer/loginContext";
+import { FavoriteProductsContext } from "../../contexts/customer/favoriteProductsContext";
 
 // HTML parser
 import parse from "html-react-parser";
@@ -27,8 +29,10 @@ import categoryIconUrls from "../../utils/categoryIconUrls";
 function Home() {
   const navigate = useNavigate();
 
-  // context
+  // contexts
   var { products, handleProducts } = React.useContext(ProductsContext);
+  var { customer, isAuthenticated } = React.useContext(LoginContext);
+  var { handleFavoriteProducts } = React.useContext(FavoriteProductsContext);
 
   var [showProducts, setShowProducts] = React.useState([]);
   var [isOpen, setIsOpen] = React.useState(false);
@@ -59,15 +63,6 @@ function Home() {
     setIsOpen(false);
   }
 
-  // function handleClickHeart(productID) {
-  //   console.log();
-  //   if (heart == false) {
-  //     setHeart(true);
-  //   } else {
-  //     setHeart(false);
-  //   }
-  // }
-
   React.useEffect(function () {
     async function run() {
       if (products.length == 0) {
@@ -95,6 +90,17 @@ function Home() {
           productsCopy.push(products[i]);
         }
         setShowProducts(productsCopy);
+      }
+
+      if (isAuthenticated == true) {
+        // communicate to backend
+        // and get favorite products list
+        var response = await axios.get(
+          "http://localhost:5000/favorite?email=" + customer["email"]
+        );
+        // context
+        // without using mate
+        handleFavoriteProducts(response.data);
       }
     }
     run();

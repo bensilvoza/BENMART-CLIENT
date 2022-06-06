@@ -12,6 +12,7 @@ import { Notification, KIND as NOTIFICATIONKIND } from "baseui/notification";
 
 // context
 import { LoginContext } from "../../contexts/customer/loginContext";
+import { FavoriteProductsContext } from "../../contexts/customer/favoriteProductsContext";
 
 // components
 import HeaderNavigationCompact from "../../components/headerNavigationCompact";
@@ -25,6 +26,7 @@ function Login() {
   // context
   var { handleCustomerMate, handleAuthenticated } =
     React.useContext(LoginContext);
+  var { handleFavoriteProducts } = React.useContext(FavoriteProductsContext);
 
   var [email, setEmail] = React.useState("");
   var [password, setPassword] = React.useState("");
@@ -44,6 +46,7 @@ function Login() {
     };
 
     // communicate to the backend
+    // send or response
     var send = await axios.post("http://localhost:5000/login", customer);
 
     if (send["data"]["message"] === "ERROR") {
@@ -74,7 +77,16 @@ function Login() {
       // set customer as authenticated or login
       handleAuthenticatedMateLocal();
 
-      // navigate customer to homepage
+      // communicate to backend
+      // and get favorite products list
+      var response = await axios.get(
+        "http://localhost:5000/favorite?email=" + email
+      );
+      // context
+      // without using mate
+      handleFavoriteProducts(response.data);
+
+      // navigate to homepage
       navigate("/");
     }
   }

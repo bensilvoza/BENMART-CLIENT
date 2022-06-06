@@ -9,6 +9,7 @@ function LoginContextProvider(props) {
   function handleCustomer(details) {
     setCustomer(details);
   }
+  // with or without mate is absolutely fine
   // handle user mate
   var handleCustomerMate = handleCustomer;
 

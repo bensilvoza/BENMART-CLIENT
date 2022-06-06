@@ -26,7 +26,7 @@ function CartItems(props) {
       <Cell span={1}>
         <div
           onClick={props.onClickDeleteItem}
-          style={{ fontSize: "1.3rem", color: "gray" }}
+          style={{ fontSize: "1.3rem", color: "gray", cursor: "pointer" }}
         >
           <i className="bi bi-trash"></i>
         </div>
