@@ -20,7 +20,7 @@ import ProductCard from "../../../components/productCard";
 import Foooter from "../../../components/footer";
 import ProductsFilter from "../../../components/productsFilter";
 import CompareProducts from "../../../components/compareProducts";
-import WishList from "../../../components/wishList";
+import FaveProducts from "../../../components/faveProducts";
 import Space from "../../../components/space";
 
 // utils
@@ -120,7 +120,7 @@ function Products() {
             onChangePriceSlider={({ value }) => value && setPriceSlider(value)}
           />
           <Space height="1rem" />
-          <WishList />
+          <FaveProducts />
           <Space height="1rem" />
           <CompareProducts />
           <Space height="1rem" />
