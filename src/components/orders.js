@@ -16,7 +16,7 @@ function Orders(props) {
 
   return (
     <>
-      <Cell span={5}>
+      <div>
         <h1
           style={{
             fontFamily: "Montserrat",
@@ -75,9 +75,9 @@ function Orders(props) {
             <p>₱{thousandSeparator(order["price"] * order["quantity"])}.00</p>
           </div>
         ))}
-      </Cell>
+      </div>
 
-      <Cell span={3}>
+      <div>
         <div>
           <ul className="list-group">
             <li
@@ -121,7 +121,7 @@ function Orders(props) {
             </li>
           </ul>
         </div>
-      </Cell>
+      </div>
     </>
   );
 }

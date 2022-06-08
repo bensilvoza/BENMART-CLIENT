@@ -6,8 +6,8 @@ function FeedbackCard(props) {
       style={{
         border: "3px dashed gray",
         borderRadius: ".5rem",
-        paddingTop: "1rem",
-        paddingBottom: "1rem",
+        paddingTop: "3rem",
+        paddingBottom: "3rem",
       }}
     >
       <div
@@ -28,9 +28,8 @@ function FeedbackCard(props) {
       >
         <div
           style={{
-            border: "2px solid gray",
-            borderRadius: ".4rem",
-            padding: ".3rem",
+            backgroundColor: "lightgray",
+            padding: "1rem",
             fontFamily: "Montserrat",
             color: "black",
             marginTop: ".4rem",

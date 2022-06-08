@@ -16,13 +16,12 @@ function HeaderNavigationCompact(props) {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
           fontFamily: "Montserrat",
           fontSize: "1.1rem",
           fontWeight: "500",
-          /* backgroundColor: "#F5F5F5", */
+          backgroundColor: "#F5F5F5",
           padding: "1rem",
-          borderBottom: "1px solid lightgray",
         }}
       >
         <p style={{ cursor: "pointer" }} onClick={handleClickBenmart}>

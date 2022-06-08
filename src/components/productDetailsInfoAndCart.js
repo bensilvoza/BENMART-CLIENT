@@ -1,4 +1,9 @@
 import * as React from "react";
+
+// css
+import "./productDetailsInfoAndCart.css";
+
+// components
 import Space from "./space";
 import AddToCartNotification from "./addToCartNotification";
 
@@ -43,7 +48,29 @@ function ProductDetailsInfoAndCart(props) {
         Our Online Store receives orders non-stop and you will receive your
         order based on the standard delivery time.
       </p>
-      <Space height="2rem" />
+      <Space height="3rem" />
+
+      <p className="button-heading">Color</p>
+      <Space height="1rem" />
+      <div>
+        <div className="color-button">Lightblue</div>
+        <div className="color-button">Gray</div>
+        <div className="color-button">Matte Black</div>
+        <div className="color-button">Pink</div>
+      </div>
+
+      <Space height="3rem" />
+
+      <p className="button-heading">Size</p>
+      <Space height="1rem" />
+      <div>
+        <div className="size-button">Small</div>
+        <div className="size-button">Meduim</div>
+        <div className="size-button">Large</div>
+        <div className="size-button">Extra Large</div>
+      </div>
+
+      <Space height="3rem" />
 
       {props.showAddToCartNotification ? (
         <AddToCartNotification

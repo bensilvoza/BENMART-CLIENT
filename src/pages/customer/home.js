@@ -108,6 +108,15 @@ function Home() {
 
   return (
     <>
+      <HeaderNavigationCompact
+        onClickProducts={handleClickProducts}
+        onClickCart={handleClickCart}
+        onClickAccount={handleClickAccount}
+        close={handleClickCloseSearchModal}
+        isOpen={isOpen}
+        handleClickOpenSearchModal={handleClickOpenSearchModal}
+      />
+
       <Grid
         overrides={{
           Grid: {
@@ -119,15 +128,6 @@ function Home() {
         }}
       >
         <Cell span={12}>
-          <HeaderNavigationCompact
-            onClickProducts={handleClickProducts}
-            onClickCart={handleClickCart}
-            onClickAccount={handleClickAccount}
-            close={handleClickCloseSearchModal}
-            isOpen={isOpen}
-            handleClickOpenSearchModal={handleClickOpenSearchModal}
-          />
-
           <Space height="3rem" />
         </Cell>
 

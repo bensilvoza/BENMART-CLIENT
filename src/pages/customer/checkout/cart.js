@@ -118,6 +118,7 @@ function Cart() {
   console.log(orders);
   return (
     <>
+      <HeaderNavigationCompact />
       <Grid
         overrides={{
           Grid: {
@@ -129,9 +130,6 @@ function Cart() {
         }}
       >
         <Cell span={12}>
-          <div>
-            <HeaderNavigationCompact />
-          </div>
           <Space height="1rem" />
         </Cell>
 

@@ -1,0 +1,23 @@
+.button-heading {
+    font-family: Montserrat;
+    font-size: 1.5rem;
+}
+
+.color-button {
+  border: 1px solid gray;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  display: inline;
+  margin-right: .5rem;
+  cursor: pointer;
+}
+
+.size-button {
+    border: 1px solid gray;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    display: inline;
+    margin-right: .5rem;
+    cursor: pointer;
+}
+

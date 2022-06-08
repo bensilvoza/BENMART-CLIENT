@@ -68,6 +68,7 @@ function Register() {
 
   return (
     <>
+      <HeaderNavigationCompact onClickProducts={handleClickProducts} />
       <Grid
         overrides={{
           Grid: {
@@ -78,10 +79,6 @@ function Register() {
           },
         }}
       >
-        <Cell span={12}>
-          <HeaderNavigationCompact onClickProducts={handleClickProducts} />
-        </Cell>
-
         <Cell span={6}>
           <Space height="1rem" />
           <Notification

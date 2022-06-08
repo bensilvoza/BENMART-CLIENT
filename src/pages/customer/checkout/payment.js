@@ -62,7 +62,11 @@ function Payment() {
     // Paypal payment method
     // communicate to the backend
     if (paypal === true) {
+      // send or response
       var send = await axios.post("http://localhost:5000/payment", load);
+
+      // go to a secure paypal server
+      window.location = send["data"];
 
       // terminate
       return;
@@ -118,6 +122,7 @@ function Payment() {
 
   return (
     <>
+      <HeaderNavigationCompact />
       <Grid
         overrides={{
           Grid: {
@@ -129,7 +134,6 @@ function Payment() {
         }}
       >
         <Cell span={12}>
-          <HeaderNavigationCompact />
           <Space height="3rem" />
         </Cell>
 

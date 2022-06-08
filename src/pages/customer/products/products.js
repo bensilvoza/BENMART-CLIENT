@@ -99,9 +99,10 @@ function Products() {
 
   return (
     <>
+      <HeaderNavigationCompact />
+
       <Grid>
         <Cell span={12}>
-          <HeaderNavigationCompact />
           <Space height="3rem" />
         </Cell>
 

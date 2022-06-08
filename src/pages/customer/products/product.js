@@ -18,7 +18,7 @@ import { Grid, Cell } from "baseui/layout-grid";
 import HeaderNavigationCompact from "../../../components/headerNavigationCompact";
 import Foooter from "../../../components/footer";
 import ProductDetailsInfoAndCart from "../../../components/productDetailsInfoAndCart";
-import Notification from "../../../components/addToCartNotification";
+import ProductReview from "../../../components/productReview";
 import Space from "../../../components/space";
 
 function Product() {
@@ -124,12 +124,7 @@ function Product() {
 
   return (
     <>
-      {/* main notification */}
-      {showIsAuthenticatedMessage === true && (
-        <Fade top>
-          <Notification backgroundColor="#fcc0b8" message="Login required" />
-        </Fade>
-      )}
+      <HeaderNavigationCompact onClickProducts={handleClickProducts} />
 
       <Grid
         overrides={{
@@ -142,7 +137,6 @@ function Product() {
         }}
       >
         <Cell span={12}>
-          <HeaderNavigationCompact onClickProducts={handleClickProducts} />
           <Space height="4rem" />
         </Cell>
 
@@ -180,7 +174,20 @@ function Product() {
         )}
 
         <Cell span={12}>
-          <Space height="15rem" />
+          <Space height="3rem" />
+          <div style={{ height: "1px", borderBottom: "1px dotted gray" }}></div>
+          <Space height="3rem" />
+        </Cell>
+
+        <Cell span={8}>
+          <h1 style={{ fontFamily: "Montserrat", fontSize: "2rem" }}>
+            Customer Reviews
+          </h1>
+          <ProductReview />
+        </Cell>
+
+        <Cell span={12}>
+          <Space height="4rem" />
         </Cell>
       </Grid>
 

@@ -15,6 +15,7 @@ import { LoginContext } from "../../contexts/customer/loginContext";
 // components
 import HeaderNavigationCompact from "../../components/headerNavigationCompact";
 import PersonalInformation from "../../components/personalInformation";
+import AccountSideNav from "../../components/accountSideNav";
 import Orders from "../../components/orders";
 import Foooter from "../../components/footer";
 import Space from "../../components/space";
@@ -25,8 +26,48 @@ function Account() {
   // context
   var { customer } = React.useContext(LoginContext);
 
+  var [currentRenderedComponent, setCurrentRenderedComponent] = React.useState(
+    <PersonalInformation />
+  );
+
   var [ordersInformation, setOrdersInformation] = React.useState([]);
   var [address, setAddress] = React.useState("");
+
+  // components
+  var manageMyAccount = <PersonalInformation />;
+  var myOrders = (
+    <div>
+      <h1
+        style={{
+          fontFamily: "Montserrat",
+          fontSize: "2rem",
+          fontWeight: "700",
+        }}
+      >
+        My Orders
+      </h1>
+      <Space height="2rem" />
+
+      {ordersInformation.map((orderInformation) => (
+        <>
+          <Orders
+            orderID={orderInformation["ID"]}
+            address={address}
+            orders={orderInformation["orders"]}
+            total={orderInformation["total"]}
+            paymentMethod={orderInformation["paymentMethod"].toUpperCase()}
+          />
+          <div>
+            <Space height="2rem" />
+            <div style={{ textAlign: "center", fontSize: "2rem" }}>
+              <i className="bi bi-three-dots m-0"></i>
+            </div>
+            <Space height="2rem" />
+          </div>
+        </>
+      ))}
+    </div>
+  );
 
   function handleClickProducts() {
     navigate("/products");
@@ -40,10 +81,14 @@ function Account() {
     navigate("/login");
   }
 
-  // destroy is not a function
-  // error occured when you put
-  // async function in useEffect
-  // parent loop
+  function handleClickManageMyAccount() {
+    setCurrentRenderedComponent(manageMyAccount);
+  }
+
+  function handleClickMyOrders() {
+    setCurrentRenderedComponent(myOrders);
+  }
+
   React.useEffect(function () {
     async function run() {
       async function getOrders() {
@@ -79,6 +124,11 @@ function Account() {
 
   return (
     <>
+      <HeaderNavigationCompact
+        onClickProducts={handleClickProducts}
+        onClickCart={handleClickCart}
+        onClickAccount={handleClickAccount}
+      />
       <Grid
         overrides={{
           Grid: {
@@ -90,52 +140,21 @@ function Account() {
         }}
       >
         <Cell span={12}>
-          <HeaderNavigationCompact
-            onClickProducts={handleClickProducts}
-            onClickCart={handleClickCart}
-            onClickAccount={handleClickAccount}
-          />
-
           <Space height="3rem" />
         </Cell>
 
-        <PersonalInformation />
+        <Cell span={3}>
+          <AccountSideNav
+            onClickManageMyAccount={handleClickManageMyAccount}
+            onClickMyOrders={handleClickMyOrders}
+          />
+        </Cell>
+
+        <Cell span={9}>{currentRenderedComponent}</Cell>
 
         <Cell span={12}>
           <Space height="4rem" />
         </Cell>
-
-        <Cell span={8}>
-          <h1
-            style={{
-              fontFamily: "Montserrat",
-              fontSize: "2rem",
-              fontWeight: "700",
-            }}
-          >
-            My Orders
-          </h1>
-          <Space height="2rem" />
-        </Cell>
-
-        {ordersInformation.map((orderInformation) => (
-          <>
-            <Orders
-              orderID={orderInformation["ID"]}
-              address={address}
-              orders={orderInformation["orders"]}
-              total={orderInformation["total"]}
-              paymentMethod={orderInformation["paymentMethod"].toUpperCase()}
-            />
-            <Cell span={12}>
-              <Space height="2rem" />
-              <div style={{ textAlign: "center", fontSize: "2rem" }}>
-                <i className="bi bi-three-dots m-0"></i>
-              </div>
-              <Space height="2rem" />
-            </Cell>
-          </>
-        ))}
       </Grid>
 
       <div

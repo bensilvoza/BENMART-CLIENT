@@ -64,12 +64,9 @@ function Summary() {
     run();
   }, []);
 
-  console.log(address);
-  // count every render
-  // console.log("render: " + Math.random());
-
   return (
     <>
+      <HeaderNavigationCompact />
       <Grid
         overrides={{
           Grid: {
@@ -81,7 +78,6 @@ function Summary() {
         }}
       >
         <Cell span={12}>
-          <HeaderNavigationCompact />
           <Space height="3rem" />
         </Cell>
 

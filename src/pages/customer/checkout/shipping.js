@@ -123,6 +123,7 @@ function Shipping() {
 
   return (
     <>
+      <HeaderNavigationCompact />
       <Grid
         overrides={{
           Grid: {
@@ -134,7 +135,6 @@ function Shipping() {
         }}
       >
         <Cell span={12}>
-          <HeaderNavigationCompact />
           <Space height="3rem" />
         </Cell>
 

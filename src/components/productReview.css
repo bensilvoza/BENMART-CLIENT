@@ -1,0 +1,34 @@
+
+.reviews-box {
+    border: 1px solid gray;
+    border-radius: 1rem;
+    padding: 2.5rem;
+    font-family: Montserrat;
+    font-size: 1rem;
+}
+
+
+/* .review-box {
+    review box here
+} */
+
+.author-like-box {
+   display: flex;
+   justify-content: space-between;
+}
+
+.author {
+    font-weight: 700;
+}
+
+.review-button {
+    display: flex;
+    justify-content: end;
+}
+
+.review-button-child-div {
+    padding: 1rem;
+    color: white;
+    background-color: black;
+}
+
