@@ -11,15 +11,26 @@ function CategoryCard(props) {
         padding: "5rem",
       }}
     >
-      <img
-        style={{
-          width: "100%",
-          height: "10rem",
-          objectFit: "contain",
-        }}
-        src={props.url}
-        alt="img"
-      />
+      <div>
+        <img
+          style={{
+            width: "100%",
+            height: "10rem",
+            objectFit: "contain",
+          }}
+          src={props.url}
+          alt="img"
+        />
+        <p
+          style={{
+            fontFamily: "Montserrat",
+            fontSize: "1.5rem",
+            textAlign: "center",
+          }}
+        >
+          {props.description}
+        </p>
+      </div>
     </div>
   );
 }

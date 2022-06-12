@@ -172,7 +172,7 @@ function Products() {
         <Cell span={12}>
           <Space height="1rem" />
           <Foooter />
-          <Space height="8rem" />
+          <Space height="10rem" />
         </Cell>
       </Grid>
     </>

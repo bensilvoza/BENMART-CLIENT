@@ -126,16 +126,7 @@ function Product() {
     <>
       <HeaderNavigationCompact onClickProducts={handleClickProducts} />
 
-      <Grid
-        overrides={{
-          Grid: {
-            style: {
-              display: "flex",
-              justifyContent: "center",
-            },
-          },
-        }}
-      >
+      <Grid>
         <Cell span={12}>
           <Space height="4rem" />
         </Cell>
@@ -174,12 +165,12 @@ function Product() {
         )}
 
         <Cell span={12}>
-          <Space height="3rem" />
+          <Space height="1rem" />
           <div style={{ height: "1px", borderBottom: "1px dotted gray" }}></div>
-          <Space height="3rem" />
+          <Space height="4rem" />
         </Cell>
 
-        <Cell span={8}>
+        <Cell span={12}>
           <h1 style={{ fontFamily: "Montserrat", fontSize: "2rem" }}>
             Customer Reviews
           </h1>
@@ -197,7 +188,7 @@ function Product() {
         <Cell span={12}>
           <Space height="1rem" />
           <Foooter />
-          <Space height="5rem" />
+          <Space height="10rem" />
         </Cell>
       </Grid>
     </>

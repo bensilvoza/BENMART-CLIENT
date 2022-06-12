@@ -25,6 +25,7 @@ import Space from "../../components/space";
 
 // utils
 import categoryIconUrls from "../../utils/categoryIconUrls";
+import categoryDescriptions from "../../utils/categoryDescriptions";
 
 function Home() {
   const navigate = useNavigate();
@@ -48,6 +49,10 @@ function Home() {
   }
 
   function handleClickAccount() {
+    if (isAuthenticated == true) {
+      return navigate("/account");
+    }
+
     navigate("/login");
   }
 
@@ -147,7 +152,10 @@ function Home() {
 
         {categoryIconUrls.map((categoryIconUrl, index) => (
           <Cell key={categoryIconUrl} span={3}>
-            <CategoryCard url={categoryIconUrl} />
+            <CategoryCard
+              url={categoryIconUrl}
+              description={categoryDescriptions[index]}
+            />
             {index + 1 === 4 && <Space height="1rem" />}
           </Cell>
         ))}
