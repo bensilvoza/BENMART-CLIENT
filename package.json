@@ -25,6 +25,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-search-box": "^2.2.1",
+    "react-slideshow-image": "^3.7.5",
     "styletron-engine-atomic": "^1.4.8",
     "styletron-react": "^6.0.2",
     "web-vitals": "^2.1.4"

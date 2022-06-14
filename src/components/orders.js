@@ -77,6 +77,8 @@ function Orders(props) {
         ))}
       </div>
 
+      <Space height="1rem" />
+
       <div>
         <div>
           <ul className="list-group">

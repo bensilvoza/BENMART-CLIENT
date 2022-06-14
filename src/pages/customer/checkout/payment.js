@@ -31,6 +31,10 @@ function Payment() {
   var [paypal, setPaypal] = React.useState(false);
 
   async function handleCompleteOrder() {
+    if (cod == false && gcash == false && paypal == false) {
+      return;
+    }
+
     var orderInformation = {
       ID: Math.floor(Math.random() * 1000000000),
       customerID: customer["ID"],
@@ -95,10 +99,6 @@ function Payment() {
     }
   }
 
-  // destroy is not a function
-  // error occured when you put
-  // async function in useEffect
-  // parent loop
   React.useEffect(function () {
     async function run() {
       function getOrders() {

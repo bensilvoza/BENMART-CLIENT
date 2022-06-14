@@ -24,17 +24,27 @@ function Account() {
   const navigate = useNavigate();
 
   // context
-  var { customer } = React.useContext(LoginContext);
+  var { customer, isAuthenticated } = React.useContext(LoginContext);
 
-  var [currentRenderedComponent, setCurrentRenderedComponent] = React.useState(
-    <PersonalInformation />
-  );
+  var [currentRenderedComponent, setCurrentRenderedComponent] =
+    React.useState("");
 
   var [ordersInformation, setOrdersInformation] = React.useState([]);
   var [address, setAddress] = React.useState("");
 
   // components
-  var manageMyAccount = <PersonalInformation />;
+  var manageMyAccount = (
+    <PersonalInformation
+      firstname={customer["firstname"]}
+      lastname={customer["lastname"]}
+      email={customer["email"]}
+      password=""
+      street={customer["address"]["street"]}
+      city={customer["address"]["city"]}
+      region={customer["address"]["region"]}
+      country={customer["address"]["country"]}
+    />
+  );
   var myOrders = (
     <div>
       <h1
@@ -78,7 +88,7 @@ function Account() {
   }
 
   function handleClickAccount() {
-    navigate("/login");
+    navigate("/account");
   }
 
   function handleClickManageMyAccount() {
@@ -103,6 +113,7 @@ function Account() {
       });
       setOrdersInformation(ordersCopy);
 
+      // getAddress for order information
       function getAddress() {
         var addressCopy = "";
         addressCopy = addressCopy + customer["address"]["street"];
@@ -113,12 +124,21 @@ function Account() {
       }
       getAddress();
     }
+
+    // call
     run();
   }, []);
 
-  console.log(customer);
-  console.log(ordersInformation);
+  React.useEffect(function () {
+    // customer is not logged in
+    if (isAuthenticated != true) {
+      navigate("/login");
+    } else {
+      setCurrentRenderedComponent(manageMyAccount);
+    }
+  }, []);
 
+  console.log(customer);
   // count every render
   // console.log("render: " + Math.random());
 

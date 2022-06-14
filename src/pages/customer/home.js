@@ -19,6 +19,7 @@ import HomepageBanner from "../../components/homepageBanner";
 import HeaderNavigationCompact from "../../components/headerNavigationCompact";
 import CategoryCard from "../../components/categoryCard";
 import ProductCard from "../../components/productCard";
+import ShoppingMessage from "../../components/shoppingMessage";
 import FeedbackCard from "../../components/feedbackCard";
 import Foooter from "../../components/footer";
 import Space from "../../components/space";
@@ -187,6 +188,12 @@ function Home() {
             {index % 2 === 1 && <Space height="1rem" />}
           </Cell>
         ))}
+
+        <Cell span={12}>
+          <Space height="2rem" />
+          <ShoppingMessage />
+          <Space height="2rem" />
+        </Cell>
 
         <Cell span={12}>
           <Space height="4rem" />

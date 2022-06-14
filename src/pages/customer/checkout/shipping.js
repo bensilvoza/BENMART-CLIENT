@@ -20,7 +20,8 @@ function Shipping() {
   const navigate = useNavigate();
 
   // context
-  var { customer, isAuthenticated } = React.useContext(LoginContext);
+  var { customer, isAuthenticated, handleCustomerMate } =
+    React.useContext(LoginContext);
 
   var [orders, setOrders] = React.useState([]);
   var [orderTotal, setOrderTotal] = React.useState(0);
@@ -32,7 +33,7 @@ function Shipping() {
 
   function handleClickDeleteItem(ID) {
     // do not directly modify state
-    // copy it first using standard
+    // copy it first using standard method
     // immutability concern
     var ordersCopy = [...orders].filter(function (order) {
       return order["ID"] !== ID;
@@ -54,7 +55,7 @@ function Shipping() {
     navigate("/shipping");
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     var address = {
@@ -68,20 +69,32 @@ function Shipping() {
       localStorage.getItem("orderSummary")
     );
 
+    // update
     orderSummaryLocalStorage["address"] = address;
 
+    // save to localStorage
     localStorage.setItem(
       "orderSummary",
       JSON.stringify(orderSummaryLocalStorage)
     );
 
+    // update customer
+    var customerCopy = { ...customer };
+    customerCopy["address"] = address;
+
+    // communicate to the backend
+    var response = axios.post(
+      "http://localhost:5000/register/edit",
+      customerCopy
+    );
+
+    // context
+    // update customer
+    handleCustomerMate(customerCopy);
+
     navigate("/summary");
   }
 
-  // destroy is not a function
-  // error occured when you put
-  // async function in useEffect
-  // parent loop
   React.useEffect(function () {
     async function run() {
       function getOrders() {
@@ -102,9 +115,7 @@ function Shipping() {
         var orderSummaryLocalStorage = JSON.parse(
           localStorage.getItem("orderSummary")
         );
-        console.log(orderSummaryLocalStorage);
-        console.log("TEST");
-        console.log(orderSummaryLocalStorage["address"]["street"]);
+
         if (orderSummaryLocalStorage["address"]["street"] !== undefined) {
           setStreet(orderSummaryLocalStorage["address"]["street"]);
           setCity(orderSummaryLocalStorage["address"]["city"]);

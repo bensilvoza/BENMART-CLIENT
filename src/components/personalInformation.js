@@ -15,7 +15,6 @@ import { Checkbox, STYLE_TYPE, LABEL_PLACEMENT } from "baseui/checkbox";
 
 function PersonalInformation(props) {
   var [checked, setChecked] = React.useState(false);
-
   return (
     <>
       <div
@@ -54,7 +53,7 @@ function PersonalInformation(props) {
           <Input
             type="text"
             required
-            value={props.firstnameValue}
+            value={props.firstname}
             onChange={props.onChangeFirstname}
           />
         </FormControl>
@@ -63,7 +62,7 @@ function PersonalInformation(props) {
           <Input
             type="text"
             required
-            value={props.lastnameValue}
+            value={props.lastname}
             onChange={props.onChangeLastname}
           />
         </FormControl>
@@ -72,16 +71,25 @@ function PersonalInformation(props) {
           <Input
             type="email"
             required
-            value={props.emailValue}
+            value={props.email}
             onChange={props.onChangeEmail}
           />
         </FormControl>
 
-        <FormControl label="Password">
+        <FormControl label="Old Password">
           <Input
             type="password"
             required
-            value={props.passwordValue}
+            value={props.password}
+            onChange={props.onChangePassword}
+          />
+        </FormControl>
+
+        <FormControl label="New Password">
+          <Input
+            type="password"
+            required
+            value={props.password}
             onChange={props.onChangePassword}
           />
         </FormControl>

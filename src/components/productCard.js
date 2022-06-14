@@ -91,8 +91,14 @@ function ProductCard(props) {
         alt={props.filename}
       />
       <div style={{ height: ".5rem" }}></div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>₱{props.price}.00</div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: "1.3rem",
+        }}
+      >
+        <div style={{ color: "gray" }}>₱{props.price}.00</div>
         <div
           style={{ color: "pink", cursor: "pointer" }}
           onClick={handleClickHeart}
